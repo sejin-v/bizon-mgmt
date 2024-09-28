@@ -1,3 +1,15 @@
+.table {
+  &-header {
+   @apply flex items-end justify-between;
+   margin-bottom: 10px;
+   .total {
+     @include typo($font-weight:500,$color: var(--color-gray-800));
+     em {    
+       @include typo($font-weight:700,$color: var(--color-primary-700));
+     }
+   }
+ }
+}
 .el-table {
   .el-table {
     &__inner-wrapper {

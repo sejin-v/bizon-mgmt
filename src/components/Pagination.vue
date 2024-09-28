@@ -49,39 +49,73 @@ const changeLimit = () => {
   currentPage.value = 1
   emits('changeLimit', pageLimit.value)
 }
+
+const totalPages = computed(() => {
+  return Math.ceil(props.totalCount / props.limit)
+})
 </script>
 
 <template>
   <div class="pagination">
     <!-- n개씩 보기(Select) -->
-    <div v-if="props.limitOptionsShown" class="mr-1">
-      <el-select v-if="totalCount > pageLimitOptions[0].value" v-model="pageLimit" size="sm" :style="{ width: '120px' }"
-        @change="changeLimit">
+    <!-- <div v-if="props.limitOptionsShown" class="mr-1">
+      <el-select v-if="totalCount > pageLimitOptions[0].value" v-model="pageLimit" :style="{ width: '120px' }" @change="changeLimit">
         <el-option v-for="option in pageLimitOptions" :key="option.value" :label="option.name" :value="option.value" />
       </el-select>
-    </div>
+    </div> -->
 
     <!-- Pagination -->
     <template v-if="!props.belowLimitShown">
-      <VueAwesomePaginate v-if="props.totalCount > props.limit" v-model="currentPage" :total-items="props.totalCount"
-        :items-per-page="props.limit" :max-pages-shown="props.maxPagesShown" :show-breakpoint-buttons="false"
-        :show-ending-buttons="true">
+      <VueAwesomePaginate
+        v-if="props.totalCount > props.limit"
+        v-model="currentPage"
+        :total-items="props.totalCount"
+        :items-per-page="props.limit"
+        :max-pages-shown="props.maxPagesShown"
+        :show-breakpoint-buttons="false"
+        :show-ending-buttons="true"
+        :class="{ 'pl-[34px]': currentPage !== totalPages, 'pr-[34px]': currentPage !== 1 }"
+      >
+        <template #prev-button>
+          <Icon v-if="currentPage !== 1" name="arrow-l__line--525" width="32" height="32" />
+          <Icon v-else name="arrow-l__line--d2d" width="32" height="32" class="cursor-not-allowed" />
+        </template>
+        <template #next-button>
+          <Icon v-if="currentPage !== totalPages" name="arrow-l__line--525" width="32" height="32" class="rotate-180" />
+          <Icon v-else name="arrow-l__line--d2d" width="32" height="32" class="rotate-180 cursor-not-allowed" />
+        </template>
         <template #first-page-button>
-          <Icon name="double-arrow-l__line--555" width="32" height="32" alt="첫 페이지로 이동" />
+          <Icon name="d-arrow-l__line--525" width="32" height="32" alt="첫 페이지로 이동" />
         </template>
         <template #last-page-button>
-          <Icon name="double-arrow-r__line--555" width="32" height="32" alt="마지막 페이지로 이동" />
+          <Icon name="d-arrow-l__line--525" width="32" height="32" alt="마지막 페이지로 이동" class="rotate-180" />
         </template>
       </VueAwesomePaginate>
     </template>
+
     <template v-else>
-      <VueAwesomePaginate v-model="currentPage" :total-items="props.totalCount" :items-per-page="props.limit"
-        :max-pages-shown="props.maxPagesShown" :show-breakpoint-buttons="false" :show-ending-buttons="true">
+      <VueAwesomePaginate
+        v-model="currentPage"
+        :total-items="props.totalCount"
+        :items-per-page="props.limit"
+        :max-pages-shown="props.maxPagesShown"
+        :show-breakpoint-buttons="false"
+        :show-ending-buttons="true"
+        :class="{ 'pl-[34px]': currentPage !== totalPages, 'pr-[34px]': currentPage !== 1 }"
+      >
+        <template #prev-button>
+          <Icon v-if="currentPage !== 1" name="arrow-l__line--525" width="32" height="32" />
+          <Icon v-else name="arrow-l__line--d2d" width="32" height="32" class="cursor-not-allowed" />
+        </template>
+        <template #next-button>
+          <Icon v-if="currentPage !== totalPages" name="arrow-l__line--525" width="32" height="32" class="rotate-180" />
+          <Icon v-else name="arrow-l__line--d2d" width="32" height="32" class="rotate-180 cursor-not-allowed" />
+        </template>
         <template #first-page-button>
-          <Icon name="double-arrow-l__line--555" width="32" height="32" alt="첫 페이지로 이동" />
+          <Icon name="d-arrow-l__line--525" width="32" height="32" alt="첫 페이지로 이동" />
         </template>
         <template #last-page-button>
-          <Icon name="double-arrow-r__line--555" width="32" height="32" alt="마지막 페이지로 이동" />
+          <Icon name="d-arrow-l__line--525" width="32" height="32" alt="마지막 페이지로 이동" class="rotate-180" />
         </template>
       </VueAwesomePaginate>
     </template>

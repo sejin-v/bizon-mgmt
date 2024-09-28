@@ -44,16 +44,19 @@ $button-line-colors: (
   @apply inline-flex justify-center items-center;
   @include btn-color($type: $type, $color: $color);
   @include after($w: calc(100% + 2px), $h: calc(100% + 2px)) {
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-sm);
     transition: var(--transition);
   }
   & {
     @include typo($font-weight: 600, $color: null);
     // width: max-content;
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     white-space: nowrap;
     transition: var(--transition);
+    .cm-icon {
+      margin-right: 4px;
+    }
   }
   &:disabled {
     &::after {

@@ -59,8 +59,6 @@
   .el-dialog {
     @apply flex flex-col;
     z-index: var(--z-index-popup);
-    height: min(100dvh,95%);
-    max-width: calc(100% - 32px);
     padding: 0;
     border-radius: var(--radius-lg);
 
@@ -95,32 +93,18 @@
 
     &__body {
       @apply flex flex-col flex-1;
-      @include typo(var(--font-size-15),$color: var(--color-gray-600),$line-height:22px);
+      @include typo(var(--font-size-15),500,var(--color-gray-800),22px);
       overflow-y: auto;
       max-height: 600px;
-      padding: 40px 40px 0;
+      padding: 32px 30px 0;
       overscroll-behavior: none;
     }
     &__footer {
       @apply flex items-center justify-center;
-      padding: 40px;
+      padding: 30px;
     }
   }
 
-  .popup {
-    &__desc {
-      @include typo(var(--font-size-18),500,var(--color-gray-800));
-      em {
-        @include typo(var(--font-size-18),600,var(--color-primary-800));
-      }
-      &--sm {
-        @include typo(var(--font-size-16),500,var(--color-gray-800));
-        em {
-          @include typo(var(--font-size-16),600,var(--color-primary-800));
-        }
-      }
-    }
-  }
   .detail-popup {
     .el-dialog {
       &__header {
@@ -136,6 +120,7 @@
         }
       }
       &__body {
+        @include typo(var(--font-size-15),$color: var(--color-gray-600),$line-height:22px);
         padding: 30px 40px 0;
       }
     }
@@ -143,44 +128,3 @@
 }
 
 // 페이지 단에서 사용하는 스타일
-.login-p {
-  .el-dialog {
-    &__body {
-      overflow: auto;
-    }
-  }
-}
-.apply-p {
-  .form {
-    @include space($y:7px);
-    & {
-      margin: 30px 0;
-    }
-    &__item {
-      @apply flex items-center;
-
-    }
-  }
-}
-.satisfaction-p {
-  .popup__desc--sm {
-    margin-bottom: 20px;
-  }
-  &__list {
-    @apply flex flex-col;
-    li {
-      @apply flex items-center justify-between;
-      @include typo(var(--font-size-16),600,var(--color-gray-800),19px);
-      & + li {
-        @include before(100%,1px) {
-          top: 0;
-          background-color: var(--color-gray-200);
-        }
-      & {
-          padding-top: 19px;
-          margin-top: 19px;
-        }
-      }
-    }
-  }
-}

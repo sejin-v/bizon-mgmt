@@ -1,5 +1,18 @@
 <script setup lang="ts">
-const icons = [{ fileName: 'logo-lg--fff' }, { fileName: 'logout__line--fff' }, { fileName: 'check__line--fff' }]
+const icons = [
+  { fileName: 'logo-lg--fff' },
+  { fileName: 'logout__line--fff' },
+  { fileName: 'check__line--fff' },
+  { fileName: 'search__line--fff' },
+  { fileName: 'reset__line--855' },
+  { fileName: 'caution__full--e22' },
+  { fileName: 'delete__circle--7f8' },
+  { fileName: 'arrow-b__line--7f8' },
+  { fileName: 'arrow-l__line--525' },
+  { fileName: 'arrow-l__line--d2d' },
+  { fileName: 'd-arrow-l__line--525' },
+  { fileName: 'close__line--181' },
+]
 </script>
 
 <template>
@@ -37,7 +50,7 @@ const icons = [{ fileName: 'logo-lg--fff' }, { fileName: 'logout__line--fff' }, 
 
     &-name {
       @apply flex items-center justify-center;
-      @include font($font-weight: 500);
+      font-weight: 500;
       min-height: 60px;
       padding: 5px;
       border-top: 1px solid #c7c7c7;

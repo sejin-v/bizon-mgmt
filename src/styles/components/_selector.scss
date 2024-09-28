@@ -42,7 +42,7 @@ $selector-colors: (
     height: var(--selector-size);
     border-width: 2px;
     @if ($type == checkbox) {
-      border-radius: var(--radius-xs);
+      border-radius: var(--radius-sm);
     }
   }
 }
