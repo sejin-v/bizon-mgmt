@@ -56,7 +56,7 @@ function handleCancel() {
     </div>
     <div class="box--fff">
       <SearchForm>
-        <SearchItem label="메뉴 이름">
+        <SearchItem>
           <CustomDropdown v-model="searchForm.condition" :options="searchForm.conditionOption" />
           <CustomInput v-model="searchForm.keyword" placeholder="검색어를 입력해주세요." class="flex-1" />
         </SearchItem>
@@ -80,7 +80,6 @@ function handleCancel() {
         <el-table-column prop="registerDate" label="등록일" align="center" width="150" />
       </el-table>
       <Pagination />
-      <div class="flex justify-end w-full mt-[-32px]" />
     </div>
 
     <!-- 메뉴 링크 관리 팝업 -->

@@ -12,6 +12,7 @@ const icons = [
   { fileName: 'arrow-l__line--d2d' },
   { fileName: 'd-arrow-l__line--525' },
   { fileName: 'close__line--181' },
+  { fileName: 'nodata--7f8' },
 ]
 </script>
 

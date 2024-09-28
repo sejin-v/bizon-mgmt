@@ -37,14 +37,14 @@
         padding: 0 16px;
       }
     }
-//   &.is-required {
-//     @include after {
-//       @include typo(var(--font-size-15), 500, var(--color-red), var(--form-height-md));
-//       content: '*';
-//       padding-left: 2px;
-//       padding-right: 2px;
-//     }
-//   }
+  &.is-required {
+    @include after {
+      @include typo(var(--font-size-15), 500, var(--color-red), var(--form-height-md));
+      content: '*';
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+  }
   }
 }
 

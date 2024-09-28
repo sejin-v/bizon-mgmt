@@ -2,6 +2,7 @@
 interface Props {
   searchText?: string
   clearText?: string
+  useClear: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -22,7 +23,7 @@ const emit = defineEmits(['clear', 'search'])
         <icon name="search__line--fff" width="24" height="24" alt="" aria-hidden="true" />
         {{ props.searchText }}
       </button>
-      <button type="button" class="btn__line--primary-md" @click="emit('clear')">
+      <button v-if="useClear" type="button" class="btn__line--primary-md" @click="emit('clear')">
         <icon name="reset__line--855" width="24" height="24" alt="" aria-hidden="true" />
         {{ props.clearText }}
       </button>
