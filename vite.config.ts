@@ -138,16 +138,6 @@ export default defineConfig({
     VueDevTools(),
   ],
 
-  // SCSS 전역 사용
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData:
-          '@import "./src/styles/_variables"; @import "./src/styles/_mixin";',
-      },
-    },
-  },
-
   // // https://github.com/antfu/vite-ssg
   // ssgOptions: {
   //   script: 'async',

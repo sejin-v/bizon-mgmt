@@ -188,24 +188,17 @@ onMounted(() => {
             </div> -->
               <div class="form">
                 <label class="form__label">아이디</label>
-                <CustomInput v-model:model-value="loginForm.email" placeholder="아이디를 입력하세요."
-                  prefix-icon="user__full--a5a" />
+                <CustomInput v-model:model-value="loginForm.email" placeholder="아이디를 입력하세요." prefix-icon="user__full--a5a" />
               </div>
               <div class="form">
                 <label class="form__label">비밀번호</label>
-                <CustomInput v-model:model-value="loginForm.password" placeholder="비밀번호를 입력하세요." type="password"
-                  prefix-icon="lock__full--a5a" @keydown.prevent.enter="handleLoginBtnClick" />
+                <CustomInput v-model:model-value="loginForm.password" placeholder="비밀번호를 입력하세요." type="password" prefix-icon="lock__full--a5a" @keydown.prevent.enter="handleLoginBtnClick" />
               </div>
               <div class="justify-end form">
-                <el-checkbox v-model:model-value="savedUserIdYn" true-value="Y" false-value="N">
-                  아이디 기억하기
-                </el-checkbox>
-
+                <el-checkbox v-model:model-value="savedUserIdYn" true-value="Y" false-value="N"> 아이디 기억하기 </el-checkbox>
               </div>
             </div>
-            <button type="button" class="btn__primary--lg" @click="handleLoginBtnClick">
-              로그인
-            </button>
+            <button type="button" class="btn__primary--lg" @click="handleLoginBtnClick">로그인</button>
           </div>
         </div>
       </div>
@@ -214,8 +207,7 @@ onMounted(() => {
         <li>- 아이디와 비밀번호 입력 시 계정은 대소문자로 구분하여야 합니다.</li>
         <li>- 현재 버전은 Open Beta 버전입니다.</li>
         <li>
-          - 회원가입은 해당 컨플루언서 페이지 참고 부탁드립니다. - <a class="table__underline"
-            href=" https://confluence.dx.lguplus.co.kr/pages/viewpage.action?pageId=322261837">페이지바로가기</a>
+          - 회원가입은 해당 컨플루언서 페이지 참고 부탁드립니다. - <a class="table__underline" href=" https://confluence.dx.lguplus.co.kr/pages/viewpage.action?pageId=322261837">페이지바로가기</a>
         </li>
         <li>- 기타 문의사항은 관리자에게 문의 하시기 바랍니다.<em> 한규호 (010-2378-1791, ixistudio@lguplus.co.kr)</em></li>
       </ul>
@@ -224,38 +216,24 @@ onMounted(() => {
   <common-modal v-model="popup.show" :title="popup.title" :size="MODAL_SIZE.MEDIUM">
     <template #content>
       <div class="login-popup">
+        <p>(개인정보에 대한 안내) ChatGPT에 개인정보 입력 시, 해당 개인정보가 당사를 통해 Open AI사의 해외서버에 저장될 수 있으므로 답변에 필요한 최소한의 정보를 입력하시기 바랍니다.<br /></p>
         <p>
-          (개인정보에 대한 안내) ChatGPT에 개인정보 입력 시, 해당 개인정보가 당사를 통해 Open AI사의 해외서버에 저장될 수 있으므로 답변에 필요한 최소한의 정보를 입력하시기 바랍니다.<br>
+          (영업비밀 유출에 대한 안내) ChatGPT에 당사의 영업비밀이 입력되는 경우, 해당 영업비밀이 Open AI사의 해외서버에 저장될 수 있고, 해당 정보는 회수가 불가능하며 이로 인해 회사에 막대한 손해를
+          입힐 우려가 있으므로 절대로 영업비밀을 입력하지 마시기 바랍니다.<br />
         </p>
-        <p>
-          (영업비밀 유출에 대한 안내) ChatGPT에 당사의 영업비밀이 입력되는 경우, 해당 영업비밀이 Open AI사의 해외서버에 저장될 수 있고, 해당 정보는 회수가 불가능하며 이로 인해 회사에 막대한
-          손해를 입힐 우려가 있으므로 절대로 영업비밀을 입력하지 마시기 바랍니다.<br>
-        </p>
-        <p>
-          (저작권 위반 여부에 대한 안내) ChatGPT를 통해 생성되는 컨텐츠를 활용하고자 하는 경우, 반드시 저작권 등 위반여부에 대해 사전 확인하시기 바랍니다.<br>
-        </p>
-        <p>
-          (민∙형사상 책임) 위와 같은 주의사항을 위반하는 경우 개인정보보호법, 부정경쟁방지 및 영업비밀보호에 관한 법률 등에 따라 민∙형사상 책임을 부담할 수 있으니 유의하시기 바랍니다. <br>
-        </p>
-        <p>
-          위 사항에 동의합니다.
-        </p>
+        <p>(저작권 위반 여부에 대한 안내) ChatGPT를 통해 생성되는 컨텐츠를 활용하고자 하는 경우, 반드시 저작권 등 위반여부에 대해 사전 확인하시기 바랍니다.<br /></p>
+        <p>(민∙형사상 책임) 위와 같은 주의사항을 위반하는 경우 개인정보보호법, 부정경쟁방지 및 영업비밀보호에 관한 법률 등에 따라 민∙형사상 책임을 부담할 수 있으니 유의하시기 바랍니다. <br /></p>
+        <p>위 사항에 동의합니다.</p>
       </div>
     </template>
     <template #footer>
-      <button type="button" class="btn__negative--md" @click="handleAgreeCancelBtnClick">
-        취소
-      </button>
-      <button type="button" class="btn__secondary--md" @click="handleAgreeBtnClick">
-        동의
-      </button>
+      <button type="button" class="btn__negative--md" @click="handleAgreeCancelBtnClick">취소</button>
+      <button type="button" class="btn__secondary--md" @click="handleAgreeBtnClick">동의</button>
     </template>
   </common-modal>
 </template>
 
-<style scoped lang="scss">
-@import "~/styles/pages/login";
-</style>
+<style scoped lang="scss"></style>
 
 <route lang="yaml">
 meta:

@@ -149,91 +149,9 @@ const menuList = computed(() => {
       <Icon name="icon__sidebar-robot" width="115" height="32" alt="U+ 서빙로봇" />
     </h1>
     <div class="sidebar__item">
-      <tree-section
-        v-for="root in menuList" :key="`sidebar-main-menu-${root.menuId}`"
-        class="hover-scroll sidebar__menu" :tree-data="root" :indent-level="0"
-      />
+      <tree-section v-for="root in menuList" :key="`sidebar-main-menu-${root.menuId}`" class="hover-scroll sidebar__menu" :tree-data="root" :indent-level="0" />
     </div>
   </nav>
 </template>
 
-<style lang="scss">
-.sidebar {
-  @apply flex flex-col;
-  width: var(--sidebar-width);
-  min-width: var(--sidebar-width);
-  height: 100%;
-  padding: 30px calc(var(--content-radius) + 10px) 40px 20px;
-  background: var(--sidebar-bg-color);
-  box-sizing: border-box;
-
-  .logo {
-    margin-bottom: 25px;
-    cursor: pointer;
-  }
-
-  &__menu {
-    @apply flex-1;
-    overflow-y: auto;
-    margin-bottom: 15px;
-  }
-
-  &__child {
-    margin-left: 8px;
-    padding-bottom: 20px;
-
-    .menu {
-      display: block;
-      padding: 2px 0 2px 15px;
-      color: $gray-70;
-      border-left: 1px solid #94a3b888;
-
-      &--active {
-        border-left: 1px solid var(--sidebar-menu-active-color);
-        color: var(--sidebar-menu-active-color);
-      }
-    }
-
-    // 트리 컴포넌트 구조 리팩토링 이후 제거
-    &:empty {
-      display: none;
-    }
-  }
-
-  &__item {
-    .font__subtitle {
-      margin-bottom: 10px;
-      color: $white;
-      font-weight: 500;
-      pointer-events: none;
-    }
-
-    &:hover {
-      .menu {
-        color: $white;
-        transition: var(--transition);
-        cursor: pointer;
-
-        &--active {
-          color: var(--sidebar-menu-active-color);
-        }
-      }
-    }
-  }
-
-  .logout {
-    @apply flex items-center justify-center;
-    width: 100%;
-
-    &__btn {
-      @apply flex items-center justify-center;
-      width: max-content;
-      height: var(--sidebar-footer-height);
-      padding: 0 20px;
-      background-color: #313644;
-      border-radius: 16px;
-      color: var(--color-gray-20);
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

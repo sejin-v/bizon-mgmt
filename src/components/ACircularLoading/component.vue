@@ -66,10 +66,9 @@ watchEffect(() => {
     border: 2px solid transparent;
     border-radius: 100%;
     // border-color: #ff19f5 transparent #9e4eff transparent;
-    border-color: $pink-50 transparent $purple-50 transparent;
+    // border-color: $pink-50 transparent $purple-50 transparent;
     animation: rotate-loading 1s linear 0s infinite normal;
     transform-origin: 50% 50%;
-
   }
 
   &:hover,
