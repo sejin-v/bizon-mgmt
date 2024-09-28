@@ -15,7 +15,7 @@ body {
     $font-family: var(--font-pretendard)
   );
  
-  background-color: var(--color-gray-100);
+  background-color: #f6f6f6;
   word-break: keep-all;
   box-sizing: border-box;
   
@@ -28,20 +28,15 @@ body {
   width: 100%;
   height: 100%;
 }
-.containers {
-  @apply flex flex-col;
-  overflow-y: auto;
-  margin-top: var(--header-height);
-  height: calc(100% - var(--header-height));
-}
-.content {
-  @apply flex-1;
-  padding: 40px;
 
-  // > div {
-  //   // @apply flex flex-col;
-  //   overflow-y: auto;
-  //   width: 100%;
-  //   height: 100%;
-  // }
+.content {
+  @apply flex flex-col flex-1;
+  padding: 39px 50px;
+
+  > div {
+    @apply flex flex-col;
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+  }
 }

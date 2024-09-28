@@ -65,11 +65,12 @@ export default defineConfig({
       // extensions: ['.vue', '.md'],
       // importMode: (filepath: string) => 'async',
       importMode: 'async',
-      // extendRoute(route) {
+      extendRoute(route) {
+        route.meta = { layout: 'default' }
       //   if (route.path === '/ui-examples') {
       //     route.meta = { layout: 'detail' }
       //   }
-      // },
+      },
     }),
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
     Layouts({

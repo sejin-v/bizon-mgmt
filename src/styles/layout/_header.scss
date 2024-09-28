@@ -1,33 +1,25 @@
 .header {
   @apply flex items-center justify-between;
-  position: absolute;
-  top: 0;
-  z-index: var(--z-index-header);
   width: 100%;
   min-height: var(--header-height);
-  padding: 0 60px;
-  background-color: var(--color-white);
-  box-shadow: 0px 0px 20px 0px #0000000d;
+  padding: 0 50px;
+  background: linear-gradient(91.87deg, #8553FE 3.17%, #00A89E 100%);
   box-sizing: border-box;
 
   .logo {
-    .cm-icon {
-      width: 103px;
-      height: 28px;
-    }
     a {
       @apply flex items-center;
-      @include typo(var(--font-size-24), 700, var(--color-gray-700));
+      @include typo(var(--font-size-24), 700, var(--color-white));
     }
   }
 
   &__user {
     @apply flex items-center;
-    @include typo(var(--font-size-15), $color: var(--color-gray-800));
+    @include typo(var(--font-size-15), $color: var(--color-white));
     @include after(1px, 15px) {
       top: 50%;
       right: 0;
-      background-color: #c2c2c2;
+      background-color: var(--color-white);
       transform: translateY(-50%);
     }
     & {
@@ -37,21 +29,37 @@
   }
 
   .el-menu.el-menu--horizontal {
-    height: var(--header-height);
-    border-bottom: 0;
-    margin-right: 60px;
+    @include space(20px);
+    & {
+      height: var(--header-height);
+      margin-right: 60px;
+      background-color: transparent;
+      border-bottom: 0;
+    }
     .el-menu {
       &-item {
-        @include typo(var(--font-size-16),500,var(---color-gray-600));
-        padding: 0 16px;
-        border-width: 3px;
+        @include typo(var(--font-size-16),500,var(--color-white));
+        padding: 0 8px;
+        &::before {
+          content: '';
+          opacity: 0;
+          transition: opacity 0.2s linear;
+        }
         &.is-active, &:not(.is-disabled):hover {
           background-color: transparent;
         }
         &.is-active {
           @include typo(var(--font-size-16),600);
-          border-color: var(--color-primary-800);
-          color: var(--color-primary-800) !important;
+          @include before(24px,24px) {
+            @include icon('check__line--fff');
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            opacity: 1;
+          }
+          padding: 0 8px 0px 40px;
+          border-color: var(--color-white);
+          color: var(--color-white) !important;
         }
       }
     }

@@ -1,6 +1,6 @@
 // z-index
 $z-index-map: (
-  header: 100,
+  // header: 100,
   popup: 1100
 );
 :root {
@@ -10,29 +10,24 @@ $z-index-map: (
 }
 // Layout
 :root {
-  --layout-min-width: 320px;
+  --layout-min-width: 1280px;
   --header-height: 70px;
-  // --mobile-status-bar-height: 44px;
-  --mobile-header-height: 58px;
-  --mobile-menu-height: 46px;
   --scrollbar-width: 20px;
 }
 
 // Typography
 $font-size-map: (
-  48: 48px,
-  36: 36px,
-  // 28: 28px,
-  // 26: 26px,
+  // 48: 48px,
+  // 36: 36px,
   24: 24px,
-  22: 22px,
-  20: 20px,
-  18: 18px,
+  // 22: 22px,
+  // 20: 20px,
+  // 18: 18px,
   16: 16px,
   15: 15px,
   14: 14px,
-  13: 13px,
-  12: 12px,
+  // 13: 13px,
+  // 12: 12px,
 );
 :root {
   @each $key, $value in $font-size-map {
@@ -106,12 +101,6 @@ $font-size-map: (
 
   --selector-size: 20px;
 }
-
-$textfield-size: (
-  sm: var(--form-height-sm),
-  md: var(--form-height-md),
-  lg: var(--form-height-lg)
-);
 
 // Modal
 :root {
