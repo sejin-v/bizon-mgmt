@@ -113,6 +113,8 @@
         margin: 0 40px;
         h2 {
           @include typo(var(--font-size-20),600,var(--color-gray-800),24px);
+          white-space: wrap;
+          word-break: break-all;
         }
         p {
           @include typo(var(--font-size-15),$color:var(--color-gray-600),$line-height:18px);

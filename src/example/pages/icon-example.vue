@@ -14,6 +14,7 @@ const icons = [
   { fileName: 'close__line--181' },
   { fileName: 'nodata--7f8' },
   { fileName: 'download__line--855' },
+  { fileName: 'triangle__full--525' },
 ]
 </script>
 

@@ -9,6 +9,29 @@
      }
    }
  }
+ &-desc {
+  @apply flex;
+  @include space(20px);
+  margin-bottom: 20px;
+  li {
+    @apply flex;
+    @include typo(car(--font-size-15),500,var(--color-gray-800));
+    p {
+      @include typo(car(--font-size-15),$color:var(--color-gray-600));
+      @include before(1px,13px) {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        background-color: var(--color-gray-200);
+      }
+      margin-left: 10px;
+      padding-left: 10px;
+      em {
+        @include typo(car(--font-size-15),600,var(--color-primary-700));
+      }
+    }
+  }
+ }
 }
 .el-table {
   .el-table {
@@ -37,7 +60,7 @@
         padding: 10px;
         border-bottom: 1px solid #dddddd;
         .cell {
-          @include typo(var(--font-size-15),$color: var(--color-gray-600));
+          @include typo(var(--font-size-15),400,var(--color-gray-600),17px);
           @include truncate;
           > * {
             @include truncate;
@@ -61,7 +84,7 @@
         cursor: pointer;
         &:hover {
           td.el-table__cell {
-            background: transparent;
+            background-color: #E0D3FF80;
           }
         }
         .cell {
@@ -83,6 +106,48 @@
         }
         & {
           padding-top: 42px;
+        }
+      }
+    }
+  }
+  &.data-table {
+    .el-table {
+      &__header {
+        .el-table__cell {
+          &.is-leaf {
+            background-color: var(--color-primary-200);
+            border-top: 1px solid var(--color-gray-600);
+            border-bottom: 1px solid var(--color-gray-200);
+            .cell {
+              font-weight: 500;
+            }
+          }
+          & + .el-table__cell {
+            border-left: 1px solid var(--color-gray-200);
+          }
+        }
+      }
+      &__body {
+        .el-table__row {
+          .el-table__cell {
+            height: 48px;
+            & + .el-table__cell {
+              border-left: 1px solid var(--color-gray-200);
+            }
+            &.hover-cell {
+              background-color: transparent;
+            }
+          }
+          &:hover {
+            td.el-table__cell {
+              background-color: transparent;
+            }
+          }
+          .cell {
+            em {
+              @include typo(var(--font-size-15),600,var(--color-primary-700));
+            }
+          }
         }
       }
     }

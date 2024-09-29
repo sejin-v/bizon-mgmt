@@ -93,10 +93,20 @@
   &__item {
     @apply flex items-center flex-1;
     @include space(19px);
-    .el-select {
+
+    .custom-input, .el-select {
       max-width: 292px;
     }
+  .el-radio {
+    min-width: 366px;
+    height: unset !important;
+    &__label {
+      @apply flex-1;
+    }
+  }
+  
     .search-form__item {
+      max-width: 366px;
       & + .search-form__item {
         margin-left: 40px;
       }

@@ -48,7 +48,7 @@ function handleCancel() {
     <div class="content-box">
       <SearchForm use-reset>
         <SearchItem label="접속일">
-          <CustomInput v-model="searchForm.signNum" />
+          <!-- datepicker -->
         </SearchItem>
         <SearchItem>
           <SearchItem label="가입 번호">

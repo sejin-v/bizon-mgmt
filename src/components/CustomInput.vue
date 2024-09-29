@@ -93,7 +93,7 @@ defineExpose({
         <Icon name="delete__circle--7f8" width="20" height="20" alt="내용 초기화" />
       </button>
       <p v-if="props.validMessage" class="textfield__suffix-icon">
-        <Icon name="caution__full--e22" width="20" height="20" alt="" aria-hidden="true" />
+        <Icon name="caution__full--e22" width="20" height="20" alt="" />
       </p>
 
       <!-- <button v-if="props.type === 'password' && props.useShowPassword && !props.useCount && !props.disabled && !props.readonly" type="button" class="textfield__suffix-icon" @click="showPassword">

@@ -20,14 +20,13 @@ $font-size-map: (
   // 48: 48px,
   36: 36px,
   24: 24px,
-  // 22: 22px,
-  // 20: 20px,
+  20: 20px,
   18: 18px,
   16: 16px,
   15: 15px,
   14: 14px,
-  // 13: 13px,
-  // 12: 12px,
+  13: 13px,
+  12: 12px,
 );
 :root {
   @each $key, $value in $font-size-map {
@@ -76,7 +75,7 @@ $font-size-map: (
   --radius-lg: 16px;
   --radius-md: 6px;
   --radius-sm: 4px;
-  // --radius-xxs: 2px;
+  --radius-xs: 2px;
 }
 
 // Form

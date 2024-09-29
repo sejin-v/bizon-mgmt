@@ -1,6 +1,6 @@
 .pagination {
   @apply flex justify-center;
-  margin-top: 25px;
+  margin-top: 20px;
 
   .pagination-container {
     @apply flex;
@@ -20,7 +20,7 @@
       }
       &.active-page {
         @include typo($font-weight: 600, $color: var(--color-white));
-        background: var(--color-primary-800);
+        background: var(--color-primary-700);
       }
     }
   }
