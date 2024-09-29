@@ -30,6 +30,11 @@ const termsList = [
   },
 ]
 
+const paginationOptions: IPaginationOptions = reactive({
+  totalCount: 1000,
+  limit: 20,
+})
+
 // 팝업
 const menuLinkForm = reactive({
   name: '',
@@ -79,7 +84,7 @@ function handleCancel() {
         <el-table-column prop="modifiedDate" label="수정일" align="center" width="150" />
         <el-table-column prop="registerDate" label="등록일" align="center" width="150" />
       </el-table>
-      <Pagination />
+      <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
     </div>
 
     <!-- 메뉴 링크 관리 팝업 -->

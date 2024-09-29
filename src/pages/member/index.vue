@@ -24,6 +24,11 @@ const memberList = [
   },
 ]
 
+const paginationOptions: IPaginationOptions = reactive({
+  totalCount: 1000,
+  limit: 20,
+})
+
 const goDetailPage = () => {
   router.push('member/detail')
 }
@@ -101,7 +106,7 @@ function handleCancel() {
           <template #header> 관리 영업 사원<br />이메일 </template>
         </el-table-column>
       </el-table>
-      <Pagination />
+      <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
     </div>
 
     <!-- 문서 다운로드 사유 팝업 -->

@@ -2,7 +2,7 @@
 interface Props {
   searchText?: string
   resetText?: string
-  useReset: boolean
+  useReset?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

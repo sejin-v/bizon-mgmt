@@ -171,7 +171,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="login">
+  login
+  <!-- <div class="login">
     <div>
       <div class="login-box">
         <h1 class="flex justify-center">
@@ -181,11 +182,11 @@ onMounted(() => {
           <icon name="holeman__login" width="209" height="317" alt="" />
           <div class="login-box__form">
             <div class="flex flex-col justify-center flex-1">
-              <!-- <div class="form">
+              <div class="form">
               <label class="form__label">소속 ID</label>
               <CustomInput v-model:model-value="loginForm.departmentId" placeholder="소속ID를 입력하세요."
                 prefix-icon="briefcase__full--a5a" />
-            </div> -->
+            </div>
               <div class="form">
                 <label class="form__label">아이디</label>
                 <CustomInput v-model:model-value="loginForm.email" placeholder="아이디를 입력하세요." prefix-icon="user__full--a5a" />
@@ -230,12 +231,7 @@ onMounted(() => {
       <button type="button" class="btn__negative--md" @click="handleAgreeCancelBtnClick">취소</button>
       <button type="button" class="btn__secondary--md" @click="handleAgreeBtnClick">동의</button>
     </template>
-  </common-modal>
+  </common-modal> -->
 </template>
 
 <style scoped lang="scss"></style>
-
-<route lang="yaml">
-meta:
-  layout: empty
-</route>

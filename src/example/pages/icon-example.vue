@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const icons = [
   { fileName: 'logo-lg--fff' },
+  { fileName: 'logo-bizon--fff' },
   { fileName: 'logout__line--fff' },
   { fileName: 'check__line--fff' },
   { fileName: 'search__line--fff' },

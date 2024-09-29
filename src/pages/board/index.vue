@@ -30,6 +30,11 @@ const termsList = [
   },
 ]
 
+const paginationOptions: IPaginationOptions = reactive({
+  totalCount: 1000,
+  limit: 20,
+})
+
 const goCreatePage = () => {
   router.push('board/detail')
 }
@@ -59,7 +64,7 @@ const goCreatePage = () => {
         <el-table-column prop="modifiedDate" label="수정일" align="center" width="150" />
         <el-table-column prop="registerDate" label="등록일" align="center" width="150" />
       </el-table>
-      <Pagination />
+      <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
       <div class="flex justify-end w-full mt-[-32px]">
         <a href="javascript:void(0);" type="button" class="btn__full--primary-md" @click="goCreatePage">등록</a>
       </div>

@@ -65,3 +65,22 @@
     }
   }
 }
+
+.header--login {
+  @apply flex items-end justify-between;
+  @include typo(var(--font-size-28), 700, var(--color-white),33px);
+  width: 100%;
+  min-height: var(--login-header-height);
+  padding: 25px 50px;
+  background: linear-gradient(91.87deg, #8553FE 3.17%, #00A89E 100%);
+  .logo {
+    @apply flex items-center;
+    @include typo(var(--font-size-48), 700, var(--color-white),48px);
+    &-wrap {
+      @include typo(var(--font-size-18), $color:var(--color-white), $line-height:22px);
+      em {
+        font-weight: 700;
+      }
+    }
+  }
+}

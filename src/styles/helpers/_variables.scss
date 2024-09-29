@@ -12,13 +12,15 @@ $z-index-map: (
 :root {
   --layout-min-width: 1280px;
   --header-height: 70px;
+  --login-header-height: 120px;
   --scrollbar-width: 15px;
 }
 
 // Typography
 $font-size-map: (
-  // 48: 48px,
+  48: 48px,
   36: 36px,
+  28: 28px,
   24: 24px,
   20: 20px,
   18: 18px,

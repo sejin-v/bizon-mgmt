@@ -29,6 +29,11 @@ const applyStatusList = [
   },
 ]
 
+const paginationOptions: IPaginationOptions = reactive({
+  totalCount: 1000,
+  limit: 20,
+})
+
 // 팝업
 const popup: IModalPopup = reactive({
   downloadResonPopup: {
@@ -103,7 +108,7 @@ function handleCancel() {
     <el-table-column prop="increaseStatus" label="증속 완료" align="center" width="150" />
     <el-table-column prop="applicationStatus" label="청약 속도 원복" align="center" width="150" />
   </el-table>
-  <Pagination />
+  <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
 
   <!-- 문서 다운로드 사유 팝업 -->
   <common-modal v-model="popup.downloadResonPopup.show" title="문서 다운로드 사유" confirm-text="저장" @cancel="handleCancel" @confirm="handleCancel">

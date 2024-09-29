@@ -11,6 +11,11 @@ const feedbackList = [
     detailedStatus: '매우불만(5명), 불만(20명), 보통(20명), 만족(35명), 매우만족(20명)',
   },
 ]
+
+const paginationOptions: IPaginationOptions = reactive({
+  totalCount: 1000,
+  limit: 20,
+})
 </script>
 
 <template>
@@ -39,7 +44,7 @@ const feedbackList = [
       <template #default> 매우불만(5명), 불만(20명), 보통(20명), <em>만족(35명)</em>, 매우만족(20명) </template>
     </el-table-column>
   </el-table>
-  <Pagination />
+  <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
   <div class="flex justify-end w-full mt-[-32px]">
     <a href="javascript:void(0);" type="button" class="btn__full--primary-md">주관식 답변보기</a>
   </div>

@@ -3,6 +3,7 @@ const searchForm = reactive({
   applyDate: '',
   signNum: '',
   applicationTraffic: '',
+  applicationTrafficOption: [{ label: '미정', value: '미정' }],
 })
 const feedbackList = [
   {
@@ -19,6 +20,11 @@ const feedbackList = [
     answerDate: '2024-05-03', // 답변일
   },
 ]
+
+const paginationOptions: IPaginationOptions = reactive({
+  totalCount: 1000,
+  limit: 20,
+})
 
 // 팝업
 const popup: IModalPopup = reactive({
@@ -44,7 +50,7 @@ function handleCancel() {
         <CustomInput v-model="searchForm.signNum" />
       </SearchItem>
       <SearchItem label="청약트래픽">
-        <CustomDropdown v-model="searchForm.applicationTraffic" placeholder="선택하세요" />
+        <CustomDropdown v-model="searchForm.applicationTraffic" placeholder="선택하세요" :options="searchForm.applicationTrafficOption" />
       </SearchItem>
     </SearchItem>
   </SearchForm>
@@ -71,7 +77,7 @@ function handleCancel() {
     <el-table-column prop="answer" label="답변" align="center" min-width="567" />
     <el-table-column prop="answerDate" label="답변일" align="center" width="150" />
   </el-table>
-  <Pagination />
+  <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
 
   <!-- 문서 다운로드 사유 팝업 -->
   <common-modal v-model="popup.downloadResonPopup.show" title="더 나은 서비스를 위해 추가적으로 하고 싶은 말씀을 자유롭게 써주시기 바랍니다." desc="2024-09-09" :show-close="false">

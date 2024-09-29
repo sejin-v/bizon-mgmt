@@ -66,7 +66,12 @@ export default defineConfig({
       // importMode: (filepath: string) => 'async',
       importMode: 'async',
       extendRoute(route) {
-        route.meta = { layout: 'default' }
+        if (route.path === '/login') {
+          route.meta = { layout: 'login' }
+        }
+        else {
+          route.meta = { layout: 'default' }
+        }
       //   if (route.path === '/ui-examples') {
       //     route.meta = { layout: 'detail' }
       //   }
