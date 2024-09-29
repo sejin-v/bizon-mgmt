@@ -60,22 +60,13 @@
         padding: 10px;
         border-bottom: 1px solid #dddddd;
         .cell {
-          @include typo(var(--font-size-15),400,var(--color-gray-600),17px);
+          @include typo($color:var(--color-gray-600), $line-height:17px);
           @include truncate;
           > * {
             @include truncate;
           }
           em {
             @include typo(var(--font-size-15),600,var(--color-gray-600));
-          }
-          .font-color--blue {
-            @include typo(var(--font-size-15),600,#1662F8);
-          }
-          .font-color--pink {
-            @include typo(var(--font-size-15),600,var(--color-primary-800));
-          }
-          .font-color--dark-gray {
-            @include typo(var(--font-size-15),500,var(--color-gray-800),18px);
           }
         }
       }

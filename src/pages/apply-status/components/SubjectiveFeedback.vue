@@ -73,8 +73,8 @@ function handleCancel() {
         </div>
       </template>
     </el-table-column>
-    <el-table-column prop="question" label="질의" align="center" min-width="567" />
-    <el-table-column prop="answer" label="답변" align="center" min-width="567" />
+    <el-table-column prop="question" label="질의" align="center" min-width="532" />
+    <el-table-column prop="answer" label="답변" align="center" min-width="532" />
     <el-table-column prop="answerDate" label="답변일" align="center" width="150" />
   </el-table>
   <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
