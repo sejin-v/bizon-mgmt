@@ -21,8 +21,9 @@ const props = defineProps({
 const imageSrc = computed(() => {
   return `/icon/${props.name}.${props.extension}`
 })
+const ariaHidden = computed(() => !props.alt || props.alt.trim() === '')
 </script>
 
 <template>
-  <img :src="imageSrc" class="cm-icon" :alt="alt" :style="`width: ${width}px; height: ${height}px;`" />
+  <img :src="imageSrc" class="cm-icon" :alt="alt" :aria-hidden="ariaHidden ? 'true' : null" :style="`width: ${width}px; height: ${height}px;`" />
 </template>

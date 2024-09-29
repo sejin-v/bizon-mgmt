@@ -65,7 +65,7 @@ $selector-colors: (
     }
   }
   .el-#{$type}__label {
-    @include typo(var(--font-size-15), $color:var(--color-gray-600));
+    @include typo(var(--font-size-15), $color:var(--color-gray-600),$line-height: var(--selector-size));
     padding-left: 10px;
   }
 }
@@ -129,4 +129,7 @@ $selector-colors: (
   @include selector-base(radio);
   @include selector-color(radio);
   @include selector-active-color(radio);
+  &-group {
+    align-items: flex-start !important;
+  }
 }

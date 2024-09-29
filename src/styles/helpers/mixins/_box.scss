@@ -14,4 +14,7 @@
   &--fff {
     @include box(40px);
   }
+  &--f3f {
+    @include box(20px,$bg-color:var(--color-gray-100));
+  }
 }

@@ -27,6 +27,7 @@
     .form__item {
       @apply flex-1;
       width: 50%;
+      border-bottom: none;
       & + .form__item {
         border-left: 1px solid var(--color-gray-200);
       }
@@ -44,9 +45,11 @@
         left: 0;
         background-color: var(--color-gray-200);
       }
+      @include typo(var(--fomt-size-15),$color:var(--color-black));
+      @include space(10px);
       & {
         @apply flex items-center flex-1;
-        min-height: 44px;
+        min-height: 60px;
         padding: 10px 16px;
         background-color: var(--color-white);
       }
@@ -70,18 +73,21 @@
   border-radius: var(--radius-xl);
 
   &__item-area {
-    @apply flex flex-1;
-    @include space(40px);
+    @apply flex flex-1 flex-col;
+    @include space($y:10px);
   }
   &__btn-area {
+    @apply flex items-center;
     @include before(1px,100%) {
       top: 50%;
       left: 0;
       background-color: var(--color-primary-300);
       transform: translateY(-50%);
     }
-    padding-left: 40px;
-    margin-left: 40px;
+    & {
+      padding-left: 40px;
+      margin-left: 40px;
+    }
   }
 
   &__item {
@@ -90,9 +96,14 @@
     .el-select {
       max-width: 292px;
     }
+    .search-form__item {
+      & + .search-form__item {
+        margin-left: 40px;
+      }
+    }
   }
   &__label {
     @include typo($font-weight:500,$color:var(--color-gray-800),$line-height:var(--form-height-md));
-    min-width: fit-content;
+    min-width: 55px;
   }
 }

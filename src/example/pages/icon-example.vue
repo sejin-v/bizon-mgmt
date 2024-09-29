@@ -13,6 +13,7 @@ const icons = [
   { fileName: 'd-arrow-l__line--525' },
   { fileName: 'close__line--181' },
   { fileName: 'nodata--7f8' },
+  { fileName: 'download__line--855' },
 ]
 </script>
 

@@ -53,7 +53,7 @@ const goCreatePage = () => {
         <p class="total">total <em>10</em></p>
       </div>
       <el-table :data="termsList" style="width: 100%" empty-text="조회된 내용이 없습니다.">
-        <el-table-column type="index" label="No" align="center" width="60" />
+        <el-table-column type="index" label="No" align="center" width="80" />
         <el-table-column prop="category" label="구분" align="center" min-width="150" />
         <el-table-column prop="title" label="제목" min-width="300" />
         <el-table-column prop="modifiedDate" label="수정일" align="center" width="150" />

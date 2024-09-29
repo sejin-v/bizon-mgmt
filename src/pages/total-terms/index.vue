@@ -67,7 +67,7 @@ function handleCancel() {
         <button type="button" class="btn__line--primary-md" @click="openNoticeDetail">등록</button>
       </div>
       <el-table :data="termsList" style="width: 100%">
-        <el-table-column type="index" label="No" align="center" width="60" />
+        <el-table-column type="index" label="No" align="center" width="80" />
         <el-table-column prop="name" label="메뉴명" align="center" min-width="200" />
         <el-table-column label="메뉴 URL" min-width="300">
           <template #default="scope">
