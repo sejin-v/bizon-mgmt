@@ -1,5 +1,6 @@
 .form {
   @include before(100%,1px) {
+    z-index: 1;
     top: 0;
     left: 0;
     background-color: var(--color-gray-600);
@@ -12,39 +13,52 @@
   &__item {
     @apply flex items-center;
     @include typo(var(--font-size-15),$color: var(--color-gray-600));
+    background-color: var(--color-primary-200);
     border-bottom: 1px solid var(--color-gray-200);
 
-    .custom-input {
-      max-width: 343px;
-    }
     .el-select {
       max-width: 259px;
     }
   }
 
-  &__label {
+  &__group {
     @apply flex items-center;
-    @include typo(var(--font-size-15),500,var(--color-gray-800));
-    min-width: 200px;
-    padding: 20px 16px;
-    height: 60px;
-    background-color: var(--color-primary-200);
-    border-left: 1px solid var(--color-gray-200);
-    border-right: 1px solid var(--color-gray-200);
-    & + * {
-      @include space(10px);
-      & {
-        padding: 0 16px;
+    width: 100%;
+    .form__item {
+      @apply flex-1;
+      width: 50%;
+      & + .form__item {
+        border-left: 1px solid var(--color-gray-200);
       }
     }
-  &.is-required {
-    @include after {
-      @include typo(var(--font-size-15), 500, var(--color-red), var(--form-height-md));
-      content: '*';
-      padding-left: 2px;
-      padding-right: 2px;
-    }
   }
+  &__label {
+    @include typo(var(--font-size-15),500,var(--color-gray-800));
+    display: inline-block;
+    min-width: 200px;
+    height: 100%;
+    padding: 0 16px;
+    & + div {
+      @include before(1px,100%) {
+        top: 0;
+        left: 0;
+        background-color: var(--color-gray-200);
+      }
+      & {
+        @apply flex items-center flex-1;
+        min-height: 44px;
+        padding: 10px 16px;
+        background-color: var(--color-white);
+      }
+    }
+    &.is-required {
+      @include after {
+        @include typo(var(--font-size-15), 500, var(--color-red-800));
+        content: '*';
+        padding-left: 2px;
+        padding-right: 2px;
+      }
+    }
   }
 }
 

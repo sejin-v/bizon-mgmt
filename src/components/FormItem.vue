@@ -18,6 +18,8 @@ const props = withDefaults(defineProps<Props>(), {
     <div v-if="group" class="form__group">
       <slot />
     </div>
-    <slot v-else />
+    <div v-else>
+      <slot />
+    </div>
   </div>
 </template>

@@ -54,7 +54,7 @@ function handleCancel() {
       <h2>전체 약관 목록</h2>
       <p class="title__desc">서비스 관련 약관을 관리합니다.</p>
     </div>
-    <div class="box--fff">
+    <div class="content-box">
       <SearchForm>
         <SearchItem>
           <CustomDropdown v-model="searchForm.condition" :options="searchForm.conditionOption" />

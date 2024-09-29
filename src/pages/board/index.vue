@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+const router = useRouter()
+
 const searchForm = reactive({
   category: 'FAQ',
   categoryOption: [
@@ -27,6 +29,10 @@ const termsList = [
     registerDate: '2024-05-03',
   },
 ]
+
+const goCreatePage = () => {
+  router.push('board/detail')
+}
 </script>
 
 <template>
@@ -35,7 +41,7 @@ const termsList = [
       <h2>게시판 관리</h2>
       <p class="title__desc">FAQ와 공지사항을 관리합니다.</p>
     </div>
-    <div class="box--fff">
+    <div class="content-box">
       <SearchForm>
         <SearchItem>
           <CustomDropdown v-model="searchForm.category" :options="searchForm.categoryOption" />
@@ -55,7 +61,7 @@ const termsList = [
       </el-table>
       <Pagination />
       <div class="flex justify-end w-full mt-[-32px]">
-        <a href="javascript:void(0);" type="button" class="btn__full--primary-md">등록</a>
+        <a href="javascript:void(0);" type="button" class="btn__full--primary-md" @click="goCreatePage">등록</a>
       </div>
     </div>
   </div>
