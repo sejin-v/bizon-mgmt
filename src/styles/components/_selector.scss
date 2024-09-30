@@ -9,6 +9,7 @@ $selector-colors: (
 @mixin selector-base($type) {
   height: var(--selector-size) !important;
   margin-right: 20px !important;
+  
   .el-#{$type}__input {
     &.is-checked {
       .el-#{$type}__inner {

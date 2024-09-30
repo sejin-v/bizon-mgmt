@@ -61,7 +61,7 @@ function handleCancel() {
     </div>
     <div class="content-box">
       <SearchForm>
-        <SearchItem>
+        <SearchItem label="메뉴이름">
           <CustomDropdown v-model="searchForm.condition" :options="searchForm.conditionOption" />
           <CustomInput v-model="searchForm.keyword" placeholder="검색어를 입력해주세요." class="flex-1" />
         </SearchItem>
@@ -69,9 +69,8 @@ function handleCancel() {
 
       <div class="table-header">
         <p class="total">total <em>10</em></p>
-        <button type="button" class="btn__line--primary-md" @click="openNoticeDetail">등록</button>
       </div>
-      <el-table :data="termsList" style="width: 100%">
+      <el-table :data="termsList" style="width: 100%" class="no-cursor">
         <el-table-column type="index" label="No" align="center" width="80" />
         <el-table-column prop="name" label="메뉴명" align="center" min-width="200" />
         <el-table-column label="메뉴 URL" min-width="300">
@@ -85,6 +84,9 @@ function handleCancel() {
         <el-table-column prop="registerDate" label="등록일" align="center" width="150" />
       </el-table>
       <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
+      <div class="flex justify-end w-full mt-[-32px]">
+        <button type="button" class="btn__full--primary-md" @click="openNoticeDetail">등록</button>
+      </div>
     </div>
 
     <!-- 메뉴 링크 관리 팝업 -->

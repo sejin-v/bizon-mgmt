@@ -33,7 +33,7 @@
   .dp {
     &__main {
       @apply flex-1;
-      min-width: 240px;
+      max-width: 230px;
     }
     &__input {
       @include typo($color:var(--textfield-color),$font-family:var(--font-pretendard));

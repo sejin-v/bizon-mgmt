@@ -53,12 +53,12 @@ const memberInfoForm = reactive({
             <CustomInput v-model="memberInfoForm.clientMgNm" max-length="20" />
           </FormItem>
           <FormItem label="고객사 담당자 연락처">
-            <CustomInput v-model="memberInfoForm.clientMgPhNm" />
+            <CustomInput v-model="memberInfoForm.clientMgPhNm" type="tel" />
           </FormItem>
         </FormItem>
         <FormItem label="고객사 담당자 이메일">
           <CustomInput v-model="memberInfoForm.clientMgMail" /><span>&#64;</span>
-          <CustomInput v-model="memberInfoForm.clientMgMail" />
+          <CustomInput v-model="memberInfoForm.clientMgMail" width="263px" />
           <CustomDropdown v-model="email" :options="emailOption" />
         </FormItem>
         <FormItem group>
@@ -66,12 +66,12 @@ const memberInfoForm = reactive({
             <CustomInput v-model="memberInfoForm.mgmtNm" max-length="20" />
           </FormItem>
           <FormItem label="담당 영업사원 연락처">
-            <CustomInput v-model="memberInfoForm.mgmtPhNm" />
+            <CustomInput v-model="memberInfoForm.mgmtPhNm" type="tel" />
           </FormItem>
         </FormItem>
         <FormItem label="담당 영업사원 이메일">
           <CustomInput v-model="memberInfoForm.mgmtMail" /><span>&#64;</span>
-          <CustomInput v-model="memberInfoForm.mgmtMail" />
+          <CustomInput v-model="memberInfoForm.mgmtMail" width="263px" />
           <CustomDropdown v-model="email" :options="emailOption" />
         </FormItem>
       </form>

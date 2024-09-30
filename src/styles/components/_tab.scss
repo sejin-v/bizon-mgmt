@@ -1,4 +1,9 @@
 .el-tabs {
+  height: 100%;
+  .el-tab-pane {
+    @apply flex flex-col;
+    height: 100%;
+  }
   .el-tabs {
     &__header {
       margin: 0 0 40px;

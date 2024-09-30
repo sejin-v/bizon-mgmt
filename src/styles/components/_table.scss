@@ -37,7 +37,7 @@
   .el-table {
     &__inner-wrapper {
       &::before {
-        background-color: #dddddd;
+        content: none;
       }
     }
     &__header {
@@ -141,6 +141,12 @@
           }
         }
       }
+    }
+  }
+
+  &.no-cursor {
+    .el-table__row {
+      cursor: auto;
     }
   }
 }

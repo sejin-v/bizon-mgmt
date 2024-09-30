@@ -4,7 +4,7 @@ import type { IInputProps } from '~/types/custom-input'
 const props = withDefaults(defineProps<IInputProps>(), {
   modelValue: '',
   type: 'text',
-  width: '100%',
+  width: '',
   maxLength: '',
   prefixIcon: '',
   placeholder: '',

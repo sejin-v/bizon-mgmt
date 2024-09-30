@@ -48,9 +48,9 @@ const goCreatePage = () => {
     </div>
     <div class="content-box">
       <SearchForm>
-        <SearchItem>
+        <SearchItem label="구분">
           <CustomDropdown v-model="searchForm.category" :options="searchForm.categoryOption" />
-          <CustomInput v-model="searchForm.keyword" placeholder="검색어를 입력해주세요." class="flex-1" />
+          <CustomInput v-model="searchForm.keyword" placeholder="검색어를 입력해주세요." />
         </SearchItem>
       </SearchForm>
 
