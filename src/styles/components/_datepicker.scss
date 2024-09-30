@@ -36,6 +36,13 @@
       min-width: 240px;
     }
     &__input {
+      @include typo($color:var(--textfield-color),$font-family:var(--font-pretendard));
+      width: 100%;
+      height: var(--form-height-md);
+      padding: 0 15px;
+      border-radius: var(--textfield-radius);
+      border: 1px solid var(--textfield-border-color);
+
       &_wrap {
         position: relative;
         > div {
@@ -45,13 +52,6 @@
           right: 30px;
         }
       }
-      @include typo($color:var(--textfield-color),$font-family:var(--font-pretendard));
-      width: 100%;
-      height: var(--form-height-md);
-      padding: 0 15px;
-      border-radius: var(--textfield-radius);
-      border: 1px solid var(--textfield-border-color);
-
       &::placeholder {
         color: var(--textfield-placeholder-color);
       }
@@ -66,7 +66,7 @@
           .dp__input_icon {
             @include icon($name: calendar__line--dce);
           }
-         }
+        }
       }
     }
     &__disabled {
