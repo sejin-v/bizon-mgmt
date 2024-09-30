@@ -1,17 +1,17 @@
 /* ========================== Variables ========================== */
 $button-style: (
   sm: (
-    min-width: 68px,
+    min-width: 60px,
     height: var(--form-height-sm),
     padding: 10px 12px
   ),
   md: (
-    min-width: 79px,
+    min-width: 72px,
     height: var(--form-height-md),
     padding: 10px 16px
   ),
   lg: (
-    min-width: 89px,
+    min-width: 80px,
     height: var(--form-height-lg),
     padding: 15px 20px
   )
@@ -20,7 +20,7 @@ $button-style: (
 $button-solid-colors: (
   primary: (
     text: var(--color-white),
-    default: var(--color-primary-800)
+    default: var(--color-primary-700)
   ),
   negative: (
     text: var(--color-gray-500),
@@ -30,8 +30,8 @@ $button-solid-colors: (
 
 $button-line-colors: (
   primary: (
-    text: var(--color-primary-800),
-    default: var(--color-primary-800)
+    text: var(--color-primary-700),
+    default: var(--color-primary-700)
   ),
   negative: (
     text: var(--color-gray-500),

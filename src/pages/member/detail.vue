@@ -5,7 +5,7 @@ const applyStatus = ref('Y')
 const email = ref('직접입력')
 const emailOption = reactive([
   { label: '직접입력', value: 1 },
-  { label: 'gmail.com', value: 3 },
+  { label: 'gmail.com', value: 2 },
   { label: 'naver.com', value: 3 },
 ])
 

@@ -2,7 +2,7 @@
   .el-select {
     &__wrapper {
       height: var(--form-height-md);
-      padding: 6px 10px 6px 15px;
+      padding: 7px 10px 7px 15px;
       border: 1px solid var(--textfield-border-color);
       border-radius: var(--textfield-radius);
       box-shadow: none;
@@ -43,7 +43,6 @@
       @include typo($color: var(--textfield-color));
     }
     &__placeholder {
-      // @include typo($color: var(--textfield-placeholder-color));
       &.is-transparent {
         color: var(--textfield-placeholder-color) !important;
       }
@@ -71,7 +70,7 @@
   &.el-popper {
     &.is-pure {
       margin-top: -9px;
-      border: 1px solid var(--color-gray-200);
+      border: 1px solid var(--textfield-border-color);
       box-shadow: none;
 
       .el-select-dropdown {

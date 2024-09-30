@@ -77,8 +77,8 @@ const closeMenu = () => {
           >
             <template #action-preview />
             <template #action-buttons ref="dateButton">
-              <button type="button" class="btn__negative--sm" @click="closeMenu">취소</button>
-              <button type="button" class="btn__primary--sm" @click="selectDate">선택</button>
+              <button type="button" class="btn__line--negative-sm" @click="closeMenu">취소</button>
+              <button type="button" class="btn__full--primary-sm" @click="selectDate">선택</button>
             </template>
           </VueDatePicker>
         </div>

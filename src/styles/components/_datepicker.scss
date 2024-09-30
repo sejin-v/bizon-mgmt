@@ -29,7 +29,201 @@
       }
     }
   }
-  .dp__main {
-    @apply flex-1;
+
+  .dp {
+    &__main {
+      @apply flex-1;
+      min-width: 240px;
+    }
+    &__input {
+      &_wrap {
+        position: relative;
+        > div {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 30px;
+        }
+      }
+      @include typo($color:var(--textfield-color),$font-family:var(--font-pretendard));
+      width: 100%;
+      height: var(--form-height-md);
+      padding: 0 15px;
+      border-radius: var(--textfield-radius);
+      border: 1px solid var(--textfield-border-color);
+
+      &::placeholder {
+        color: var(--textfield-placeholder-color);
+      }
+      &:read-only {
+        &:hover {
+          border-color: var(--textfield-border-color);
+        }
+        &:not(.dp__disabled) {
+          color: var(--textfield-readonly-color);
+        }
+        & + div {
+          .dp__input_icon {
+            @include icon($name: calendar__line--dce);
+          }
+         }
+      }
+    }
+    &__disabled {
+      background: var(--color-white);
+      border-color: var(--textfield-disabled-border-color);
+      color: var(--textfield-disabled-color);
+    }
+
+    &__input_icon {
+      @include icon($name: calendar__line--a38);
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      path {
+        display: none;
+      }
+    }
+    &__clear_icon {
+      display: none;
+    }
+    //calendar
+    &__menu {
+      @include typo($font-family: var(--font-pretendard));
+      min-width: 300px;
+      border: 1px solid var(--textfield-border-color);
+      border-radius: var(--textfield-radius);
+      .dp__arrow_top, .dp__arrow_bottom {
+        display: none;
+      }
+      &_inner {
+        padding: 0;
+      }
+    }
+    &__month_year_wrap {
+      @apply items-center;
+      height: 40px;
+      padding: 0 10px;
+
+      .dp__month_year_wrap {
+        width: calc(100% - 32px);
+        button {
+          &:first-child {
+            @apply flex justify-end;
+            &::after {
+              content: "년";
+            }
+          }
+          &:last-child {
+            @apply flex justify-start;
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+    &__month_year_select {
+      @include typo(var(--font-size-15), 600,var(--color-gray-800));
+      &:hover {
+        background: transparent;
+      }
+    }
+    &--arrow-btn-nav {
+      @apply flex items-center justify-center;
+      width: 32px;
+      &:first-child {
+        @include before(16px,16px) {
+          @include icon($name: arrow-l__line--525);
+        }
+      }
+      &:last-child {
+        @include before(16px,16px) {
+          @include icon($name: arrow-l__line--525);
+          transform: rotate(-180deg);
+        }
+      }
+      .dp__inner_nav {
+        display: none;
+      }
+    }
+    &__calendar {
+      &_header {
+        @include typo(var(--font-size-10),600,var(--color-gray-800),12px);
+        &_item {
+          @apply flex items-center justify-center;
+          height: 25px;
+          padding: 0;
+        }
+        &_separator {
+          display: none;
+        }
+      }
+      &_row {
+        margin: 0;
+      }
+      &_item {
+        @apply flex items-center justify-center;
+        @include typo(var(--font-size-12),500,var(--color-gray-400));
+        width: 42px;
+        height: 42px;
+        &:first-child {
+          color: var(--color-red-800);
+        }
+        &:last-child {
+          color: #1662F8;
+        }
+      }
+    }
+    &__cell {
+      &_inner {
+        width: 30px;
+        height: 30px;
+        padding: 12px;
+        border-radius: var(--textfield-radius);
+        transition: var(--transition);
+        &.dp__date_hover:not(.dp__cell_disabled),
+        &.dp__range_start,
+        &.dp__range_between,
+        &.dp__range_end {
+          background-color: var(--color-primary-700);
+          color: var(--color-white);
+        }
+        &.dp__range_between {
+          border: none;
+        }
+        &.dp__date_hover_start, &.dp__date_hover_end {
+          border-radius: var(--textfield-radius);
+        }
+        &.dp__cell_disabled {
+          &:hover {
+            background: transparent;
+            color: var(--color-gray-400);
+          }
+        }
+        &.dp__cell_offset {
+          color: var(--color-gray-200);
+        }
+        &.dp__today {
+          border: 0;
+          background-color: var(--color-gray-150);
+          color: var(--color-gray-600);
+        }
+      }
+    }
+    &__overlay {
+      @include typo(var(--font-size-13),500,$font-family:var(--font-pretendard));
+      &_cell {
+        &:hover {
+          background-color: var(--color-primary-700);
+          color: var(--color-white);
+        }
+      }
+      &_cell_active {
+        background-color: var(--color-primary-700);
+        color: var(--color-white);
+      }
+    }
+    &__overlay_action {
+      display: none !important;
+    }
   }
 }

@@ -1,7 +1,7 @@
 /* ========================== Variables ========================== */
 $textfield-padding: (
   input: 0 15px,
-  textarea: 15px
+  textarea: 16px 15px
 );
 
 /* ========================== Mixins ========================== */
@@ -16,6 +16,8 @@ $textfield-padding: (
     border-radius: var(--textfield-radius);
     transition: var(--transition);
     word-break: break-all;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
 
     @if ($type == input) {
       @include truncate;
@@ -106,8 +108,8 @@ $textfield-padding: (
   &__count {
     @include typo(var(--font-size-13),$color:var(--color-gray-300));
     position: absolute;
-    right: map-get($textfield-padding, textarea);
-    bottom: map-get($textfield-padding, textarea);
+    right: 10px;
+    bottom: 10px;
     &-value {
       color: var(--color-gray-800);
     }

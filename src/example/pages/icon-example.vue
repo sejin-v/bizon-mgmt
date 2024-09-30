@@ -16,6 +16,8 @@ const icons = [
   { fileName: 'nodata--7f8' },
   { fileName: 'download__line--855' },
   { fileName: 'triangle__full--525' },
+  { fileName: 'calendar__line--dce' },
+  { fileName: 'calendar__line--a38' },
 ]
 </script>
 
