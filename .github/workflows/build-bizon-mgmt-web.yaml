@@ -155,6 +155,9 @@ jobs:
           npm install -g pnpm
           pnpm install --no-frozen-lockfile
           pnpm build
+          cd ${ARTIFACT_PATH}
+          tar -cvf ${ARTIFACT_NAME} .
+          ls ./
 
       # ========================================================================== #
 
