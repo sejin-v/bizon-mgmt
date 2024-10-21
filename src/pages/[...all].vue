@@ -1,7 +1,6 @@
 <script setup lang="ts">
-const { t } = useI18n()
-const route = useRoute()
-console.log(route.params)
+const { t } = useI18n();
+const route = useRoute();
 </script>
 
 <template>
