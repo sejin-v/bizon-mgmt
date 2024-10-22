@@ -1,0 +1,124 @@
+.form {
+  @include before(100%,1px) {
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--color-gray-600);
+  }
+  @include after(1px,100%) {
+    top: 0;
+    left: 0;
+    background-color: var(--color-white);
+  }
+  &__item {
+    @apply flex items-center;
+    @include typo(var(--font-size-15),$color: var(--color-gray-600));
+    background-color: var(--color-primary-200);
+    border-bottom: 1px solid var(--color-gray-200);
+
+    .el-select {
+      max-width: 259px;
+    }
+    .custom-input {
+      max-width: 343px;
+    }
+  }
+
+  &__group {
+    @apply flex items-center;
+    width: 100%;
+    .form__item {
+      @apply flex-1;
+      width: 50%;
+      border-bottom: none;
+      & + .form__item {
+        border-left: 1px solid var(--color-gray-200);
+      }
+    }
+  }
+  &__label {
+    @include typo(var(--font-size-15),500,var(--color-gray-800));
+    display: inline-block;
+    min-width: 200px;
+    height: 100%;
+    padding: 0 16px;
+    & + div {
+      @include before(1px,100%) {
+        top: 0;
+        left: 0;
+        background-color: var(--color-gray-200);
+      }
+      @include typo(var(--fomt-size-15),$color:var(--color-black));
+      @include space(10px);
+      & {
+        @apply flex items-center flex-1;
+        min-height: 60px;
+        padding: 10px 16px;
+        background-color: var(--color-white);
+      }
+    }
+    &.is-required {
+      @include after {
+        @include typo(var(--font-size-15), 500, var(--color-red-800));
+        content: '*';
+        padding-left: 2px;
+        padding-right: 2px;
+      }
+    }
+  }
+}
+
+.search-form {
+  @apply flex justify-between;
+  padding: 20px 30px;
+  margin-bottom: 30px;
+  background-color: var(--color-primary-200);
+  border-radius: var(--radius-xl);
+
+  &__item-area {
+    @apply flex flex-1 flex-col;
+    @include space($y:10px);
+  }
+  &__btn-area {
+    @apply flex items-center;
+    @include before(1px,100%) {
+      top: 50%;
+      left: 0;
+      background-color: var(--color-primary-300);
+      transform: translateY(-50%);
+    }
+    & {
+      min-width: fit-content;
+      padding-left: 40px;
+      margin-left: 40px;
+    }
+  }
+
+  &__item {
+    @apply flex items-center;
+    @include space(19px);
+
+    .el-select {
+      width: 292px;
+    }
+  .el-radio {
+    min-width: 366px;
+    height: unset !important;
+    margin-right: 0 !important;
+    &__label {
+      @apply flex-1;
+    }
+  }
+  
+    .search-form__item {
+      max-width: 366px;
+      & + .search-form__item {
+        margin-left: 40px;
+      }
+    }
+  }
+  &__label {
+    @include typo($font-weight:500,$color:var(--color-gray-800),$line-height:var(--form-height-md));
+    min-width: 55px;
+  }
+}

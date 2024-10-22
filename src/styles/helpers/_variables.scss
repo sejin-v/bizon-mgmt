@@ -1,0 +1,113 @@
+// z-index
+$z-index-map: (
+  // header: 100,
+  popup: 1100
+);
+:root {
+  @each $key, $value in $z-index-map {
+    --z-index-#{$key}: #{$value};
+  }
+}
+// Layout
+:root {
+  --layout-min-width: 1280px;
+  --header-height: 70px;
+  --login-header-height: 120px;
+  --scrollbar-width: 15px;
+}
+
+// Typography
+$font-size-map: (
+  48: 48px,
+  36: 36px,
+  28: 28px,
+  24: 24px,
+  20: 20px,
+  18: 18px,
+  16: 16px,
+  15: 15px,
+  14: 14px,
+  13: 13px,
+  12: 12px,
+  10: 10px,
+);
+:root {
+  @each $key, $value in $font-size-map {
+    --font-size-#{$key}: #{$value};
+  }
+  --font-pretendard: 'Pretendard', -apple-system, system-ui, Roboto, 'Apple SD Gothic Neo',
+    'Malgun Gothic', sans-serif;
+}
+
+/* ===== Color ===== */
+:root {
+  // Primary Scale
+  --color-primary-800: #7B44FF;
+  --color-primary-700: #8553FE;
+  --color-primary-600: #976CFF;
+  --color-primary-500: #B190FF;
+  --color-primary-400: #C6AEFF;
+  --color-primary-300: #E0D3FF;
+  --color-primary-200: #F7F3FF;
+
+  // Gray Scale
+  --color-gray-800: #181a1b;
+  --color-gray-700: #3b4044;
+  --color-gray-600: #525960;
+  --color-gray-500: #66707a;
+  --color-gray-400: #7f8a94;
+  --color-gray-300: #a8b3bd;
+  --color-gray-200: #dce0e5;
+  --color-gray-150: #e7ebee;
+  --color-gray-100: #f3f5f6;
+  --color-gray-50: #f9fafb;
+
+  // Etc Scale
+  --color-red-800: #e22a21;
+  --color-green-800: #00aa02;
+  --color-orange-800: #f86800;
+
+  --color-black: #000000;
+  --color-white: #ffffff;
+}
+
+// Radius
+:root {
+  // --radius-full: 100%;
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 6px;
+  --radius-sm: 4px;
+  --radius-xs: 2px;
+}
+
+// Form
+:root {
+  --form-height-sm: 34px;
+  --form-height-md: 40px;
+  --form-height-lg: 52px;
+
+  --textfield-radius: var(--radius-md);
+  --textfield-color: var(--color-gray-800);
+  --textfield-border-color: var(--color-gray-200);
+  --textfield-placeholder-color: var(--color-gray-300);
+  --textfield-focus-border-color: var(--color-primary-700);
+  --textfield-disabled-color: #181a1b66;
+  --textfield-disabled-border-color: var(--color-gray-200);
+  --textfield-readonly-border-color: var(--color-gray-200);
+  --textfield-readonly-color: var(--color-gray-500);
+  --textfield-validation-color: var(--color-red-800);
+
+  --selector-size: 20px;
+}
+
+// Modal
+:root {
+  --modal-width-md: 800px;
+  --modal-width-lg: 1000px;
+}
+
+// ETC
+:root {
+  --transition: all 0.2s linear;
+}

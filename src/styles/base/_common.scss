@@ -1,0 +1,38 @@
+/* ========================== Page ========================== */
+.title {
+  @apply flex items-center;
+  @include typo(var(--font-size-36), 600, #222222);
+
+  &__desc {
+    @include typo(var(--font-size-15), $color: var(--color-gray-600));
+    @include before(1px,22px) {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: var(--color-gray-200);
+    }
+    & {
+      padding-left: 13px;
+      margin-left: 13px;
+    }
+  }
+}
+
+.content-box {
+  @apply flex-1;
+  @extend .box--fff;
+  margin-top: 23px;
+
+  &__desc {
+    @apply flex justify-end;
+    @include typo(var(--font-size-15),500,var(--color-gray-600));
+    margin-bottom: 10px;
+    em {
+      @include typo(var(--font-size-15),500,var(--color-red-800));
+    }
+  }
+  &__btn {
+    @apply flex justify-center;
+    margin-top: 32px;
+  }
+}

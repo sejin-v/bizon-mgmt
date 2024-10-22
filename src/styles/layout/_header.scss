@@ -1,0 +1,86 @@
+.header {
+  @apply flex items-center justify-between;
+  width: 100%;
+  min-height: var(--header-height);
+  padding: 0 50px;
+  background: linear-gradient(91.87deg, #8553FE 3.17%, #00A89E 100%);
+  box-sizing: border-box;
+
+  .logo {
+    a {
+      @apply flex items-center;
+      @include typo(var(--font-size-24), 700, var(--color-white));
+    }
+  }
+
+  &__user {
+    @apply flex items-center;
+    @include typo(var(--font-size-15), $color: var(--color-white));
+    @include after(1px, 15px) {
+      top: 50%;
+      right: 0;
+      background-color: var(--color-white);
+      transform: translateY(-50%);
+    }
+    & {
+      padding-right: 15px;
+      margin-right: 15px;
+    }
+  }
+
+  .el-menu.el-menu--horizontal {
+    @include space(20px);
+    & {
+      height: var(--header-height);
+      margin-right: 60px;
+      background-color: transparent;
+      border-bottom: 0;
+    }
+    .el-menu {
+      &-item {
+        @include typo(var(--font-size-16),500,var(--color-white));
+        padding: 0 8px;
+        &::before {
+          content: '';
+          opacity: 0;
+          transition: opacity 0.2s linear;
+        }
+        &.is-active, &:not(.is-disabled):hover {
+          background-color: transparent;
+        }
+        &.is-active {
+          @include typo(var(--font-size-16),600);
+          @include before(24px,24px) {
+            @include icon('check__line--fff');
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            opacity: 1;
+          }
+          padding: 0 8px 0px 40px;
+          border-color: var(--color-white);
+          color: var(--color-white) !important;
+        }
+      }
+    }
+  }
+}
+
+.header--login {
+  @apply flex items-end justify-between;
+  @include typo(var(--font-size-28), 700, var(--color-white),33px);
+  width: 100%;
+  min-height: var(--login-header-height);
+  padding: 25px 50px;
+  background: linear-gradient(91.87deg, #8553FE 3.17%, #00A89E 100%);
+  .logo {
+    @apply flex items-center;
+    @include typo(var(--font-size-48), 700, var(--color-white),48px);
+    &-wrap {
+      @include typo(var(--font-size-18), $color:var(--color-white), $line-height:22px);
+      em {
+        font-weight: 700;
+      }
+    }
+  }
+}

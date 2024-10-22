@@ -1,0 +1,152 @@
+.table {
+  &-header {
+   @apply flex items-end justify-between;
+   margin-bottom: 10px;
+   .total {
+     @include typo($font-weight:500,$color: var(--color-gray-800));
+     em {    
+       @include typo($font-weight:700,$color: var(--color-primary-700));
+     }
+   }
+ }
+ &-desc {
+  @apply flex;
+  @include space(20px);
+  margin-bottom: 20px;
+  li {
+    @apply flex;
+    @include typo(car(--font-size-15),500,var(--color-gray-800));
+    p {
+      @include typo(car(--font-size-15),$color:var(--color-gray-600));
+      @include before(1px,13px) {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        background-color: var(--color-gray-200);
+      }
+      margin-left: 10px;
+      padding-left: 10px;
+      em {
+        @include typo(car(--font-size-15),600,var(--color-primary-700));
+      }
+    }
+  }
+ }
+}
+.el-table {
+  .el-table {
+    &__inner-wrapper {
+      &::before {
+        content: none;
+      }
+    }
+    &__header {
+      thead {
+        height: 48px;
+      }
+      .el-table__cell.is-leaf {
+        padding: 14px 10px;
+        border-bottom: 1px solid var(--color-gray-800);
+        text-align: center;
+        .cell {
+          @include typo(var(--font-size-15), 600, var(--color-gray-800), 18px);
+        }
+      }
+    }
+
+    &__body {
+      .el-table__cell {
+        height: 56px;
+        padding: 10px;
+        border-bottom: 1px solid #dddddd;
+        .cell {
+          @include typo($color:var(--color-gray-600), $line-height:17px);
+          @include truncate;
+          > * {
+            @include truncate;
+          }
+          em {
+            @include typo(var(--font-size-15),600,var(--color-gray-600));
+          }
+        }
+      }
+
+      .el-table__row {
+        cursor: pointer;
+        &:hover {
+          td.el-table__cell {
+            background-color: #E0D3FF80;
+          }
+        }
+        .cell {
+          padding: 0 8px;
+        }
+      }
+    }
+    &__empty {
+      &-block {
+        padding: 50px;
+      }
+      &-text {
+        @include typo($color: var(--color-gray-400), $line-height: 1.5);
+        @include before(40px, 40px) {
+          @include icon(nodata--7f8);
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        & {
+          padding-top: 42px;
+        }
+      }
+    }
+  }
+  &.data-table {
+    .el-table {
+      &__header {
+        .el-table__cell {
+          &.is-leaf {
+            background-color: var(--color-primary-200);
+            border-top: 1px solid var(--color-gray-600);
+            border-bottom: 1px solid var(--color-gray-200);
+            .cell {
+              font-weight: 500;
+            }
+          }
+          & + .el-table__cell {
+            border-left: 1px solid var(--color-gray-200);
+          }
+        }
+      }
+      &__body {
+        .el-table__row {
+          .el-table__cell {
+            height: 48px;
+            & + .el-table__cell {
+              border-left: 1px solid var(--color-gray-200);
+            }
+            &.hover-cell {
+              background-color: transparent;
+            }
+          }
+          &:hover {
+            td.el-table__cell {
+              background-color: transparent;
+            }
+          }
+          .cell {
+            em {
+              @include typo(var(--font-size-15),600,var(--color-primary-700));
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.no-cursor {
+    .el-table__row {
+      cursor: auto;
+    }
+  }
+}

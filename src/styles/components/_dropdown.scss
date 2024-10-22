@@ -1,0 +1,113 @@
+.el-select {
+  .el-select {
+    &__wrapper {
+      height: var(--form-height-md);
+      padding: 7px 10px 7px 15px;
+      border: 1px solid var(--textfield-border-color);
+      border-radius: var(--textfield-radius);
+      box-shadow: none;
+      &.is-hovering:not(.is-focused) {
+        box-shadow: none;
+      }
+
+      &.is-focused {
+        border: 1px solid var(--textfield-focus-border-color);
+        box-shadow: none;
+      }
+
+      &.is-disabled {
+        @include typo($color: var(--textfield-disabled-color));
+        border: 1px solid var(--textfield-border-color);
+        background: var(--color-white);
+        box-shadow: none;
+
+        .el-select__selected-item {
+          @include typo($color: var(--textfield-disabled-color));
+        }
+      }
+
+      .el-select__suffix {
+        .el-icon {
+          @include icon($name: arrow-b__line--7f8);
+          width: 20px;
+          height: 20px;
+
+          svg {
+            display: none;
+          }
+        }
+      }
+    }
+
+    &__selected-item {
+      @include typo($color: var(--textfield-color));
+    }
+    &__placeholder {
+      &.is-transparent {
+        color: var(--textfield-placeholder-color) !important;
+      }
+    }
+  }
+
+  &[readonly] {
+    pointer-events: none;
+    .el-select {
+      &__wrapper {
+        background: var(--color-white);
+      }
+      &__selected-item {
+        @include typo($color: var(--textfield-readonly-color));
+      }
+    }
+  }
+
+  &__prefix {
+    color: var(--textfield-placeholder-color) !important;
+  }
+}
+
+.el-select__popper {
+  &.el-popper {
+    &.is-pure {
+      margin-top: -9px;
+      border: 1px solid var(--textfield-border-color);
+      box-shadow: none;
+
+      .el-select-dropdown {
+        max-width: 500px;
+        border-radius: var(--textfield-radius);
+
+        &__list {
+          padding: 0;
+        }
+
+        &__item {
+          @include typo($color: var(--textfield-color), $line-height: var(--form-height-md));
+          height: var(--form-height-md);
+          padding: 0 13px;
+          transition: var(--transition);
+          p {
+            @include truncate;
+          }
+
+          &.is-hovering {
+            background: var(--color-primary-300);
+          }
+
+          &.is-disabled {
+            @include typo($color: var(--textfield-disabled-color));
+          }
+
+          &.is-selected {
+            &::after {
+              content: none;
+            }
+          }
+        }
+      }
+      .el-popper__arrow {
+        display: none;
+      }
+    }
+  }
+}
