@@ -4,7 +4,7 @@
 
 > > > > > > > 4bc5d62 (fix: readme)
 
-- Typescript, Vue3, Vitejs 기반
+- Typescript, Vue3, Vitejs 기 반
 
 ## 🚀 시작하기
 
