@@ -49,10 +49,10 @@ export default defineConfig({
     port: 8080,
     open: true,
     proxy: {
-      // '/api': {
-      // target: 'https://sc-ixistudio.temp-sp.violet.uplus.co.kr/',
-      // changeOrigin: true,
-      // },
+      '/bizon/mgmt/api': {
+        target: 'http://35.71.173.10',
+        changeOrigin: true,
+      },
     },
   },
 
@@ -72,9 +72,9 @@ export default defineConfig({
         else {
           route.meta = { layout: 'default' }
         }
-      //   if (route.path === '/ui-examples') {
-      //     route.meta = { layout: 'detail' }
-      //   }
+        //   if (route.path === '/ui-examples') {
+        //     route.meta = { layout: 'detail' }
+        //   }
       },
     }),
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts

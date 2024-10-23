@@ -1,42 +1,55 @@
 <script setup lang="ts">
 interface IMenu {
-  menuId: string
-  menuName: string
+  menuId: string;
+  menuName: string;
 }
+
+const router = useRouter();
 const menuList = ref<IMenu[]>([
   {
-    menuId: 1,
+    menuId: 'member',
     menuName: '회원관리',
   },
   {
-    menuId: 2,
+    menuId: 'apply-status',
     menuName: '통계관리',
   },
   {
-    menuId: 3,
+    menuId: 'total-terms',
     menuName: '전체 약관관리',
   },
   {
-    menuId: 4,
+    menuId: 'board',
     menuName: '게시판 관리',
   },
-])
+]);
 const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
+  console.log(key, keyPath);
+  router.push(key);
+};
 </script>
 
 <template>
   <header class="header">
     <h1 class="logo">
       <a href="javascript:void(0);">
-        <icon name="logo-lg--fff" width="104" height="28" alt="LG U+" class="mr-2.5" />
+        <icon
+          name="logo-lg--fff"
+          width="104"
+          height="28"
+          alt="LG U+"
+          class="mr-2.5"
+        />
         <span>비즈온 증속 신청</span>
       </a>
     </h1>
     <div class="flex items-center">
       <el-menu mode="horizontal" :ellipsis="false" @select="handleSelect">
-        <el-menu-item v-for="(menu, index) in menuList" :key="`mgmt=menu-list-${menu.menuId}`" :index="String(index)">
+        <el-menu-item
+          v-for="(menu, index) in menuList"
+          :key="`mgmt=menu-list-${menu.menuId}`"
+          :index="menu.menuId"
+        >
           {{ menu.menuName }}
         </el-menu-item>
       </el-menu>

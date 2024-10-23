@@ -5,3 +5,4 @@ export type UserModule = (ctx: ViteSSGContext) => void
 export * from './enums'
 export * from './grid'
 export * from './login'
+export * from './pagination'

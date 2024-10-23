@@ -22,7 +22,6 @@ declare module 'axios' {
 }
 
 const baseUrl: string = import.meta.env.VITE_API_CONTEXT_PATH
-
 const service = axios.create({
   baseURL: baseUrl,
   headers: {
@@ -50,6 +49,20 @@ service.interceptors.response.use(
   async (response) => {
     // request 결과값이 있을 시 progressbar 종료
     NProgress.done()
+
+
+    const { router, route } = useRouterStore()
+    if (!route.meta.isPublicPath && response.data.statusCode === 401) {
+      router.push('/login')
+      return
+    }
+
+    if (response.data.code.substr(0, 2) !== '20') {
+      // return Promise.reject(response.data)
+    }
+
+
+
     return response
   },
 

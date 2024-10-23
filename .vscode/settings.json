@@ -15,6 +15,7 @@
     "vitest",
     "vueuse"
   ],
+  "eslint.useFlatConfig": true,
   "prettier.enable": true,
   "editor.tabSize": 2,
   "[typescript]": {
