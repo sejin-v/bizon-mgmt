@@ -5,26 +5,28 @@ interface IMenu {
 }
 
 const router = useRouter();
+const route = useRoute();
+const defaultMenu = ref(route.fullPath);
+
 const menuList = ref<IMenu[]>([
   {
-    menuId: 'member',
+    menuId: '/user',
     menuName: '회원관리',
   },
   {
-    menuId: 'apply-status',
+    menuId: '/apply-status',
     menuName: '통계관리',
   },
   {
-    menuId: 'total-terms',
+    menuId: '/total-terms',
     menuName: '전체 약관관리',
   },
   {
-    menuId: 'board',
+    menuId: '/board',
     menuName: '게시판 관리',
   },
 ]);
 const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
   router.push(key);
 };
 </script>
@@ -44,7 +46,13 @@ const handleSelect = (key: string, keyPath: string[]) => {
       </a>
     </h1>
     <div class="flex items-center">
-      <el-menu mode="horizontal" :ellipsis="false" @select="handleSelect">
+      <el-menu
+        v-model="defaultMenu"
+        mode="horizontal"
+        :default-active="defaultMenu"
+        :ellipsis="false"
+        @select="handleSelect"
+      >
         <el-menu-item
           v-for="(menu, index) in menuList"
           :key="`mgmt=menu-list-${menu.menuId}`"

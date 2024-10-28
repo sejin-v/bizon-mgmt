@@ -1,72 +1,177 @@
 <script lang="ts" setup>
-const router = useRouter()
+import dayjs from 'dayjs';
+import { IBoardData, IBoardParams, IPaginationOptions } from '~/types';
+
+const router = useRouter();
+
+const searchOptionList = [
+  {
+    label: 'FAQ',
+    value: 'FAQ',
+  },
+  {
+    label: '공지사항',
+    value: 'ANNC',
+  },
+];
 
 const searchForm = reactive({
-  category: 'FAQ',
-  categoryOption: [
-    {
-      label: 'FAQ',
-      value: 1,
-    },
-    {
-      label: '공지사항',
-      value: 2,
-    },
-  ],
+  atclKdCd: 'FAQ',
   keyword: '',
-})
-const termsList = [
-  {
-    category: 'FAQ',
-    title: '어떻게 동작, 사용하나요?',
-    modifiedDate: '2024-05-03',
-    registerDate: '2024-05-03',
-  },
-  {
-    category: '공지사항',
-    title: '어떻게 질의해야 하나요?',
-    modifiedDate: '2024-05-03',
-    registerDate: '2024-05-03',
-  },
-]
+});
+
+const searchedForm = reactive({
+  atclKdCd: 'FAQ',
+  keyword: '',
+});
+
+const boardList = ref<IBoardData[]>();
 
 const paginationOptions: IPaginationOptions = reactive({
-  totalCount: 1000,
-  limit: 20,
-})
+  totalCount: 0,
+  limit: 10,
+  currentPage: 1,
+});
 
+const getParams = () => {
+  const params: IBoardParams = {
+    page: paginationOptions.currentPage,
+    perPageNum: paginationOptions.limit,
+    atclKdCd: searchedForm.atclKdCd,
+  };
+  if (searchedForm.keyword) params.atclTit = searchedForm.keyword;
+  return params;
+};
+
+const getBoardList = async (params: IBoardParams) => {
+  const result = await request.get('/bizon/mgmt/api/board/list', {
+    params,
+  });
+  return result.data.data;
+};
+
+const saveSearchedForm = () => {
+  searchedForm.atclKdCd = searchForm.atclKdCd;
+  searchedForm.keyword = searchForm.keyword;
+};
+
+const handleSearch = async () => {
+  paginationOptions.currentPage = 1;
+  saveSearchedForm();
+  const params = getParams();
+  const result = await getBoardList(params);
+  boardList.value = result.articleList;
+  paginationOptions.totalCount = result.totalCount;
+};
+
+const handlePageChange = async () => {
+  const params = getParams();
+  const result = await getBoardList(params);
+  boardList.value = result.articleList;
+  paginationOptions.totalCount = result.totalCount;
+};
+
+const route = useRoute();
+const handleRowClick = (target) => {
+  console.log(target.atclSno);
+  console.log(target.atclKdCd);
+  router.push({
+    path: `/board/detail`,
+    query: { atclSno: target.atclSno, atclKdCd: target.atclKdCd },
+  });
+};
 const goCreatePage = () => {
-  router.push('board/detail')
-}
+  router.push('board/detail');
+};
+
+onMounted(async () => {
+  handleSearch();
+});
 </script>
 
 <template>
   <div>
-    <div class="title">
+    <div class="atclTit">
       <h2>게시판 관리</h2>
       <p class="title__desc">FAQ와 공지사항을 관리합니다.</p>
     </div>
     <div class="content-box">
-      <SearchForm>
+      <SearchForm @search="handleSearch">
         <SearchItem label="구분">
-          <CustomDropdown v-model="searchForm.category" :options="searchForm.categoryOption" />
-          <CustomInput v-model="searchForm.keyword" placeholder="검색어를 입력해주세요." />
+          <CustomDropdown
+            v-model="searchForm.atclKdCd"
+            :options="searchOptionList"
+          />
+          <CustomInput
+            v-model="searchForm.keyword"
+            placeholder="검색어를 입력해주세요."
+            @keyupEnter="handleSearch"
+          />
         </SearchItem>
       </SearchForm>
 
       <div class="table-header">
-        <p class="total">total <em>10</em></p>
+        <p class="total">
+          total <em>{{ prettyNumber(paginationOptions.totalCount) }}</em>
+        </p>
       </div>
-      <el-table :data="termsList" style="width: 100%" empty-text="조회된 내용이 없습니다.">
-        <el-table-column type="index" label="No" align="center" width="80" />
-        <el-table-column prop="category" label="구분" align="center" min-width="150" />
-        <el-table-column prop="title" label="제목" min-width="300" />
-        <el-table-column prop="modifiedDate" label="수정일" align="center" width="150" />
-        <el-table-column prop="registerDate" label="등록일" align="center" width="150" />
+      <el-table
+        :data="boardList"
+        style="width: 100%"
+        empty-text="조회된 내용이 없습니다."
+        @row-click="handleRowClick"
+      >
+        <el-table-column prop="rowNum" label="No" align="center" width="80" />
+        <el-table-column
+          prop="atclKdCd"
+          label="구분"
+          align="center"
+          min-width="150"
+        />
+        <el-table-column prop="atclTit" label="제목" min-width="300" />
+        <el-table-column
+          prop="chgDttm"
+          label="수정일"
+          align="center"
+          width="150"
+        >
+          <template #default="scope">
+            {{
+              scope.row.chgDttm
+                ? dayjs(scope.row.chgDttm).format('YYYY-MM-DD')
+                : '-'
+            }}
+          </template></el-table-column
+        >
+        <el-table-column
+          prop="regDttm"
+          label="등록일"
+          align="center"
+          width="150"
+        >
+          <template #default="scope">
+            {{
+              scope.row.regDttm
+                ? dayjs(scope.row.regDttm).format('YYYY-MM-DD')
+                : '-'
+            }}
+          </template>
+        </el-table-column>
       </el-table>
-      <Pagination :total-count="paginationOptions.totalCount" :limit="paginationOptions.limit" />
-      <div class="flex justify-end w-full mt-[-32px]">
-        <a href="javascript:void(0);" type="button" class="btn__full--primary-md" @click="goCreatePage">등록</a>
+      <Pagination
+        v-model="paginationOptions.currentPage"
+        :total-count="paginationOptions.totalCount"
+        :limit="paginationOptions.limit"
+        @click="handlePageChange"
+      />
+      <div class="flex justify-end w-full mt-[32px]">
+        <a
+          href="javascript:void(0);"
+          type="button"
+          class="btn__full--primary-md"
+          @click="goCreatePage"
+          >등록</a
+        >
       </div>
     </div>
   </div>

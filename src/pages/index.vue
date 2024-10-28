@@ -9,7 +9,7 @@
 const router = useRouter();
 
 const moveMainScreen = () => {
-  router.push('/apply-status');
+  router.push('/user');
 };
 moveMainScreen();
 </script>

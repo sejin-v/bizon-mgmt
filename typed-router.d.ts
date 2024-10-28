@@ -26,7 +26,7 @@ declare module 'vue-router/auto-routes' {
     '/apply-status/components/SubjectiveFeedback': RouteRecordInfo<'/apply-status/components/SubjectiveFeedback', '/apply-status/components/SubjectiveFeedback', Record<never, never>, Record<never, never>>,
     '/blank': RouteRecordInfo<'/blank', '/blank', Record<never, never>, Record<never, never>>,
     '/board/': RouteRecordInfo<'/board/', '/board', Record<never, never>, Record<never, never>>,
-    '/board/detail': RouteRecordInfo<'/board/detail', '/board/detail', Record<never, never>, Record<never, never>>,
+    'boardDetail': RouteRecordInfo<'boardDetail', '/board/detail', Record<never, never>, Record<never, never>>,
     'ui-examples': RouteRecordInfo<'ui-examples', '/example', Record<never, never>, Record<never, never>>,
     '/example/axios': RouteRecordInfo<'/example/axios', '/example/axios', Record<never, never>, Record<never, never>>,
     'buttons': RouteRecordInfo<'buttons', '/example/button', Record<never, never>, Record<never, never>>,
@@ -48,12 +48,12 @@ declare module 'vue-router/auto-routes' {
     'date-picker': RouteRecordInfo<'date-picker', '/example/vue-date-picker', Record<never, never>, Record<never, never>>,
     '/home': RouteRecordInfo<'/home', '/home', Record<never, never>, Record<never, never>>,
     '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
-    '/member/': RouteRecordInfo<'/member/', '/member', Record<never, never>, Record<never, never>>,
-    '/member/detail': RouteRecordInfo<'/member/detail', '/member/detail', Record<never, never>, Record<never, never>>,
     '/mgmt/': RouteRecordInfo<'/mgmt/', '/mgmt', Record<never, never>, Record<never, never>>,
     '/mgmt/preparing': RouteRecordInfo<'/mgmt/preparing', '/mgmt/preparing', Record<never, never>, Record<never, never>>,
     '/not-accessible': RouteRecordInfo<'/not-accessible', '/not-accessible', Record<never, never>, Record<never, never>>,
     '/preparing': RouteRecordInfo<'/preparing', '/preparing', Record<never, never>, Record<never, never>>,
     '/total-terms/': RouteRecordInfo<'/total-terms/', '/total-terms', Record<never, never>, Record<never, never>>,
+    '/user/': RouteRecordInfo<'/user/', '/user', Record<never, never>, Record<never, never>>,
+    '/user/[...id]': RouteRecordInfo<'/user/[...id]', '/user/:id(.*)', { id: ParamValue<true> }, { id: ParamValue<false> }>,
   }
 }

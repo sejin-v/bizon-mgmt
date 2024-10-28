@@ -2,36 +2,27 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import dayjs, { ManipulateType } from 'dayjs';
-import { IModalPopup } from '~/types/modal';
+import { IApplyData, IApplyParams, IModalPopup } from '~/types';
 import { IPaginationOptions } from '~/types/pagination';
+
+const searchDate = ref([new Date(), new Date()]);
+const searchedDate = ref([new Date(), new Date()]);
+const applyStatusList = ref<IApplyData[]>([]);
+const datePickerButton = ref();
+const downloadResonPopup = ref(false);
+const downloadReson = ref();
 
 const searchForm = reactive({
   applyDate: '',
   entrNo: '',
   brno: '',
 });
-const searchDate = ref([new Date('2024.09.01'), new Date('2024.12.15')]);
 
-//    icspRqstDt: '2024-05-03', // 비즈온 개통 일자
-//     cucoChrrNm: '손*민', // 고객사담당자명
-//     cucoChrrHpno: '010-****-1111', // 고객사담당자 전화번호
-//     svcNm: '비즈온 Standard',
-//     entrNo: '*******1231', // 가입번호
-//     brno: '123-234-345', // 사업자 번호
-//     cucoNm: 'AA 반도체', // 고객사 명
-//     applicationTraffic: {
-//       // 청약트래픽
-//       value1: '300M',
-//       value2: '500M',
-//     },
-//     increaseTraffic: {
-//       // 증속트래픽
-//       value1: '300M',
-//       value2: '1G',
-//     },
-//     icspRqstPrssFnshYn: 'Y', // 증속 완료
-//     sbscSpedRorgYn: 'Y', // 청약 속도 원복
-const applyStatusList = ref([]);
+const searchedForm = reactive({
+  applyDate: '',
+  entrNo: '',
+  brno: '',
+});
 
 const paginationOptions: IPaginationOptions = reactive({
   currentPage: 1,
@@ -39,30 +30,48 @@ const paginationOptions: IPaginationOptions = reactive({
   limit: 10,
 });
 
-const datePickerButton = ref();
-
-const getAppluData = async () => {
-  const params = {
-    entrNo: searchForm.entrNo,
-    brno: searchForm.brno,
-    // icspRqstStartDt: '20240901',
-    // icspRqstEndDt: '20241215',
-    icspRqstStartDt: dayjs(searchDate.value[0]).format('YYYYMMDD'),
-    icspRqstEndDt: dayjs(searchDate.value[1]).format('YYYYMMDD'),
+const getParams = () => {
+  const params: IApplyParams = {
+    icspRqstStartDt: dayjs(searchedDate.value[0]).format('YYYYMMDD'),
+    icspRqstEndDt: dayjs(searchedDate.value[1]).format('YYYYMMDD'),
     page: paginationOptions.currentPage,
     perPageNum: paginationOptions.limit,
   };
-  const result = await request.get(
-    '/bizon/mgmt/api/statistics/speed-increase-status',
-    { params }
-  );
+  if (searchedForm.entrNo) params.entrNo = searchedForm.entrNo;
+  if (searchedForm.brno) params.brno = searchedForm.brno;
+  return params;
+};
 
-  applyStatusList.value = result.data.data.speedIncreaseStatusList;
-  paginationOptions.totalCount = result.data.data.totalCount;
+const saveSearchedForm = () => {
+  searchedDate.value = searchDate.value;
+  searchedForm.applyDate = searchForm.applyDate;
+  searchedForm.entrNo = searchForm.entrNo;
+  searchedForm.brno = searchForm.brno;
+};
+const getAppluData = async (params: IApplyParams) => {
+  try {
+    const result = await request.get(
+      '/bizon/mgmt/api/statistics/speed-increase-status',
+      { params }
+    );
+
+    return result.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const handleClearSearchForm = () => {
+  searchDate.value = [new Date(), new Date()];
+  paginationOptions.currentPage = 1;
+  searchForm.applyDate = '';
+  searchForm.entrNo = '';
+  searchForm.brno = '';
 };
 
 const handleClickDay = (target: string) => {
-  if (!target || target === 'day') {
+  if (!target) return;
+  if (target === 'day') {
     searchDate.value = [new Date(), new Date()];
   } else {
     searchDate.value = [
@@ -76,11 +85,6 @@ const handleClickDay = (target: string) => {
   }
 };
 
-const handleClickDate = () => {
-  // selectedDate.value = '';
-  // clickDateMode.value = '';
-};
-
 const selectDate = () => {
   datePickerButton.value.selectDate();
   if (!searchDate.value[1]) searchDate.value[1] = searchDate.value[0];
@@ -90,17 +94,11 @@ const closeMenu = () => {
   datePickerButton.value.closeMenu();
 };
 
-// 팝업
-const popup: IModalPopup = reactive({
-  downloadResonPopup: {
-    show: false,
-  },
-});
 function openDownloadResonPopup() {
-  popup.downloadResonPopup.show = true;
+  downloadResonPopup.value = true;
 }
 function handleCancel() {
-  popup.downloadResonPopup.show = false;
+  downloadResonPopup.value = false;
 }
 
 const selectedDate = computed(() => {
@@ -121,13 +119,29 @@ const selectedDate = computed(() => {
         : '';
 });
 
-onMounted(() => {
-  getAppluData();
+const handleSearch = async () => {
+  paginationOptions.currentPage = 1;
+  saveSearchedForm();
+  const params = getParams();
+  const result = await getAppluData(params);
+  applyStatusList.value = result.speedIncreaseStatusList;
+  paginationOptions.totalCount = result.totalCount;
+};
+
+const handlePageChange = async () => {
+  const params = getParams();
+  const result = await getAppluData(params);
+  applyStatusList.value = result.speedIncreaseStatusList;
+  paginationOptions.totalCount = result.totalCount;
+};
+
+onMounted(async () => {
+  handleSearch();
 });
 </script>
 
 <template>
-  <SearchForm use-reset @search="getAppluData">
+  <SearchForm use-reset @search="handleSearch" @clear="handleClearSearchForm">
     <SearchItem label="접속일">
       <div class="datepicker">
         <div class="datepicker__btns">
@@ -171,7 +185,6 @@ onMounted(() => {
           :enable-time-picker="false"
           :year-first="true"
           placeholder="시작일 종료일을 입력해 주세요"
-          @open="handleClickDate"
         >
           <template #action-preview />
           <template #action-buttons>
@@ -198,14 +211,20 @@ onMounted(() => {
         <SearchItem label="가입 번호">
           <CustomInput
             v-model="searchForm.entrNo"
-            type="number"
+            type="text"
             width="292px"
+            @keyupEnter="handleSearch"
           />
         </SearchItem>
       </el-radio>
       <el-radio>
         <SearchItem label="사업자 번호">
-          <CustomInput v-model="searchForm.brno" type="number" width="292px" />
+          <CustomInput
+            v-model="searchForm.brno"
+            type="text"
+            width="292px"
+            @keyupEnter="handleSearch"
+          />
         </SearchItem>
       </el-radio>
     </SearchItem>
@@ -274,8 +293,7 @@ onMounted(() => {
         <div class="flex justify-center">
           <div class="flex flex-col items-end">
             <p class="flex items-center">
-              {{ scope.row.sbscDownSpedVlue
-              }}<icon
+              {{ scope.row.sbscDownSpedVlue }}M<icon
                 name="triangle__full--525"
                 width="11"
                 height="9"
@@ -284,8 +302,7 @@ onMounted(() => {
               />
             </p>
             <p class="flex items-center">
-              {{ scope.row.sbscUpldSpedVlue
-              }}<icon
+              {{ scope.row.sbscUpldSpedVlue }}M<icon
                 name="triangle__full--525"
                 width="11"
                 height="9"
@@ -307,8 +324,7 @@ onMounted(() => {
         <div class="flex justify-center">
           <div class="flex flex-col items-end">
             <p class="flex items-center">
-              {{ scope.row.icspRqstDownSped
-              }}<icon
+              {{ scope.row.icspRqstDownSped }}M<icon
                 name="triangle__full--525"
                 width="11"
                 height="9"
@@ -317,8 +333,7 @@ onMounted(() => {
               />
             </p>
             <p class="flex items-center">
-              {{ scope.row.icspRqstUpldSped
-              }}<icon
+              {{ scope.row.icspRqstUpldSped }}M<icon
                 name="triangle__full--525"
                 width="11"
                 height="9"
@@ -347,12 +362,11 @@ onMounted(() => {
     v-model="paginationOptions.currentPage"
     :total-count="paginationOptions.totalCount"
     :limit="paginationOptions.limit"
-    @click="getAppluData"
+    @click="handlePageChange"
   />
-
   <!-- 문서 다운로드 사유 팝업 -->
   <common-modal
-    v-model="popup.downloadResonPopup.show"
+    v-model="downloadResonPopup"
     title="문서 다운로드 사유"
     confirm-text="저장"
     @cancel="handleCancel"
@@ -361,7 +375,7 @@ onMounted(() => {
     <template #content>
       &#42; 문서 다운로드 사유를 선택해주세요.
       <div class="mt-4 box--f3f">
-        <el-radio-group class="flex-col gap-2.5">
+        <el-radio-group v-model="downloadReson" class="flex-col gap-2.5">
           <el-radio value="업무 보고용"> 업무 보고용 </el-radio>
           <el-radio value="단순 데이터 대조용"> 단순 데이터 대조용 </el-radio>
           <el-radio value="이벤트 대상자 추출용">

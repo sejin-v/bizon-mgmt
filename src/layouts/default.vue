@@ -1,8 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const route = useRoute();
+</script>
 
 <template>
   <main class="layout">
-    <layout-header />
+    <layout-header :key="route.fullPath" />
     <div class="content">
       <router-view />
     </div>

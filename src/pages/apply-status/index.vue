@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import ApplyStatus from './components/ApplyStatus.vue'
-import Feedback from './components/Feedback.vue'
-import SubjectiveFeedback from './components/SubjectiveFeedback.vue'
+import ApplyStatus from './components/ApplyStatus.vue';
+import Feedback from './components/Feedback.vue';
+import SubjectiveFeedback from './components/SubjectiveFeedback.vue';
 
-const activeTab = ref('applyStatus')
+const activeTab = ref('applyStatus');
 </script>
 
 <template>
