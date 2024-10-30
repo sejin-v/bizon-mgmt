@@ -22,4 +22,6 @@ export interface IApplyParams {
   icspRqstEndDt: string
   page?: number
   perPageNum?: number
+  exelDownRsnKdCd?: string
+
 }

@@ -18,13 +18,14 @@ export interface IUserData {
 
 
 export interface IUserParams {
+  exelDownRsnKdCd?: string
   entrNo?: string
   brno?: string
   cucoChrrNm?: string
   lastLoginDttmStart: string
   lastLoginDttmEnd: string
-  perPageNum: number
-  page: number
+  perPageNum?: number
+  page?: number
 }
 
 export interface IUserDetailData {

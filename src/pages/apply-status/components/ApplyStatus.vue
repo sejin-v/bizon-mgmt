@@ -101,6 +101,29 @@ function handleCancel() {
   downloadResonPopup.value = false;
 }
 
+const handleConfirm = async () => {
+  const params: IApplyParams = {
+    exelDownRsnKdCd: 'JOB_REPO',
+    icspRqstStartDt: dayjs(searchedDate.value[0]).format('YYYY-MM-DD'),
+    icspRqstEndDt: dayjs(searchedDate.value[1]).format('YYYY-MM-DD'),
+  };
+  if (searchedForm.entrNo) {
+    params.entrNo = searchedForm.entrNo;
+  }
+  if (searchedForm.brno) {
+    params.brno = searchedForm.brno;
+  }
+
+  await request.get(
+    '/bizon/mgmt/api/statistics/speed-increase-status-excel-download',
+    {
+      params,
+    }
+  );
+
+  downloadResonPopup.value = false;
+};
+
 const selectedDate = computed(() => {
   if (
     dayjs(searchDate.value[1]).format('YYYY-MM-DD') !==
@@ -368,17 +391,15 @@ onMounted(async () => {
     title="문서 다운로드 사유"
     confirm-text="저장"
     @cancel="handleCancel"
-    @confirm="handleCancel"
+    @confirm="handleConfirm"
   >
     <template #content>
       &#42; 문서 다운로드 사유를 선택해주세요.
       <div class="mt-4 box--f3f">
         <el-radio-group v-model="downloadReson" class="flex-col gap-2.5">
-          <el-radio value="업무 보고용"> 업무 보고용 </el-radio>
-          <el-radio value="단순 데이터 대조용"> 단순 데이터 대조용 </el-radio>
-          <el-radio value="이벤트 대상자 추출용">
-            이벤트 대상자 추출용
-          </el-radio>
+          <el-radio value="JOB_REPO"> 업무 보고용 </el-radio>
+          <el-radio value="SMP_DATA_COMP"> 단순 데이터 대조용 </el-radio>
+          <el-radio value="EVET_TRGP_EXTR"> 이벤트 대상자 추출용 </el-radio>
         </el-radio-group>
       </div>
     </template>

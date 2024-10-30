@@ -117,7 +117,28 @@ const closeMenu = () => {
 function openDownloadResonPopup() {
   downloadResonPopup.value = true;
 }
-const handleConfirm = () => {
+const handleConfirm = async () => {
+  const params: IUserParams = {
+    exelDownRsnKdCd: 'JOB_REPO',
+    lastLoginDttmStart: dayjs(searchedDate.value[0]).format('YYYY-MM-DD'),
+    lastLoginDttmEnd: dayjs(searchedDate.value[1]).format('YYYY-MM-DD'),
+  };
+  if (searchedForm.entrNo) {
+    params.entrNo = searchedForm.entrNo;
+  }
+  if (searchedForm.brno) {
+    params.brno = searchedForm.brno;
+  }
+  if (searchedForm.cucoChrrNm) {
+    params.cucoChrrNm = searchedForm.cucoChrrNm;
+  }
+  await request.get(
+    '/bizon/mgmt/api/user-management/user-list-excel-download',
+    {
+      params,
+    }
+  );
+
   downloadResonPopup.value = false;
 };
 function handleCancel() {
@@ -343,11 +364,9 @@ onMounted(async () => {
         &#42; 문서 다운로드 사유를 선택해주세요.
         <div class="mt-4 box--f3f">
           <el-radio-group v-model="downloadReson" class="flex-col gap-2.5">
-            <el-radio value="업무 보고용"> 업무 보고용 </el-radio>
-            <el-radio value="단순 데이터 대조용"> 단순 데이터 대조용 </el-radio>
-            <el-radio value="이벤트 대상자 추출용">
-              이벤트 대상자 추출용
-            </el-radio>
+            <el-radio value="JOB_REPO"> 업무 보고용 </el-radio>
+            <el-radio value="SMP_DATA_COMP"> 단순 데이터 대조용 </el-radio>
+            <el-radio value="EVET_TRGP_EXTR"> 이벤트 대상자 추출용 </el-radio>
           </el-radio-group>
         </div>
       </template>

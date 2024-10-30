@@ -29,6 +29,11 @@ const menuList = ref<IMenu[]>([
 const handleSelect = (key: string, keyPath: string[]) => {
   router.push(key);
 };
+
+const handleLogout = () => {
+  request.post('/bizon/mgmt/api/account/logout');
+  router.push('/login');
+};
 </script>
 
 <template>
@@ -64,7 +69,13 @@ const handleSelect = (key: string, keyPath: string[]) => {
 
       <button type="button" class="header__user">홍길동</button>
       <button type="button">
-        <icon name="logout__line--fff" width="24" height="24" alt="로그아웃" />
+        <icon
+          name="logout__line--fff"
+          width="24"
+          height="24"
+          alt="로그아웃"
+          @click="handleLogout"
+        />
       </button>
     </div>
   </header>

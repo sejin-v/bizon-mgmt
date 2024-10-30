@@ -127,7 +127,13 @@ onMounted(async () => {
           label="구분"
           align="center"
           min-width="150"
-        />
+        >
+          <template #default="scope">
+            {{
+              scope.row.atclKdCd === 'ANNC' ? '공지사항' : scope.row.atclKdCd
+            }}
+          </template>
+        </el-table-column>
         <el-table-column prop="atclTit" label="제목" min-width="300" />
         <el-table-column
           prop="chgDttm"

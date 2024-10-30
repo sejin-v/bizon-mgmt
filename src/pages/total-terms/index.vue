@@ -209,6 +209,7 @@ onMounted(async () => {
       title="메뉴 링크 관리"
       :confirm-text="termsData.tadvPrvsLinkId ? '저장' : '등록'"
       @cancel="handleCancel"
+      @close="handleCancel"
       @confirm="handleConfirm"
     >
       <template #content>
