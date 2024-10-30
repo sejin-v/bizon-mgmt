@@ -91,7 +91,7 @@ onMounted(async () => {
 
 <template>
   <div>
-    <div class="atclTit">
+    <div class="title">
       <h2>게시판 관리</h2>
       <p class="title__desc">FAQ와 공지사항을 관리합니다.</p>
     </div>

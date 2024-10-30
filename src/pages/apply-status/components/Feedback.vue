@@ -185,13 +185,7 @@ onMounted(async () => {
     class="data-table"
   >
     <el-table-column prop="evalQstnNo" label="No" align="center" width="100" />
-    <el-table-column
-      show-overflow-tooltip
-      prop="regDttm"
-      label="등록일"
-      align="center"
-      width="180"
-    />
+    <el-table-column prop="regDttm" label="등록일" align="center" width="180" />
     <el-table-column
       show-overflow-tooltip
       prop="evalQstnCntn"

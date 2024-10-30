@@ -212,7 +212,6 @@ onMounted(async () => {
           <CustomInput
             v-model="searchForm.entrNo"
             type="text"
-            width="292px"
             @keyupEnter="handleSearch"
           />
         </SearchItem>
@@ -222,7 +221,6 @@ onMounted(async () => {
           <CustomInput
             v-model="searchForm.brno"
             type="text"
-            width="292px"
             @keyupEnter="handleSearch"
           />
         </SearchItem>

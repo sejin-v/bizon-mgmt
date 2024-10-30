@@ -68,6 +68,9 @@
           em {
             @include typo(var(--font-size-15),600,var(--color-gray-600));
           }
+          &.el-tooltip {
+            max-width: 100%;
+          }
         }
       }
 
