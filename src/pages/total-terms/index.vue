@@ -38,7 +38,7 @@ const paginationOptions: IPaginationOptions = reactive({
   limit: 10,
 });
 const menuUrlPopup = ref(false);
-
+const mode = ref('');
 const getParams = () => {
   const params: ITermsParams = {
     page: paginationOptions.currentPage,
@@ -59,9 +59,11 @@ const getTermsList = async (params: ITermsParams) => {
 
 const handleRowClick = (target: ITermsData) => {
   termsData.value = { ...target };
+  mode.value = 'detail';
   menuUrlPopup.value = true;
 };
-const openNoticeDetail = () => {
+const openNoticeCreate = () => {
+  mode.value = 'create';
   menuUrlPopup.value = true;
 };
 
@@ -75,7 +77,7 @@ const initTermsData = () => {
     tadvPrvsLinkUrlAddr: '',
   };
 };
-const handleConfirm = () => {
+const handleConfirm = async () => {
   const data: {
     tadvPrvsLinkNm: string;
     tadvPrvsLinkUrlAddr: string;
@@ -83,13 +85,13 @@ const handleConfirm = () => {
   } = {
     tadvPrvsLinkNm: termsData.value.tadvPrvsLinkNm,
     tadvPrvsLinkUrlAddr: termsData.value.tadvPrvsLinkUrlAddr,
+    tadvPrvsLinkId: termsData.value.tadvPrvsLinkId,
   };
-  if (termsData.value.tadvPrvsLinkId) {
-    data.tadvPrvsLinkId = termsData.value.tadvPrvsLinkId;
-    request.post('/bizon/mgmt/api/terms/update', { ...data });
+  if (mode.value === 'detail') {
+    await request.post('/bizon/mgmt/api/terms/update', { ...data });
     initTermsData();
   } else {
-    request.post('/bizon/mgmt/api/terms/insert', { ...data });
+    await request.post('/bizon/mgmt/api/terms/insert', { ...data });
   }
   menuUrlPopup.value = false;
 };
@@ -196,7 +198,7 @@ onMounted(async () => {
         <button
           type="button"
           class="btn__full--primary-md"
-          @click="openNoticeDetail"
+          @click="openNoticeCreate"
         >
           등록
         </button>
@@ -207,13 +209,19 @@ onMounted(async () => {
     <common-modal
       v-model="menuUrlPopup"
       title="메뉴 링크 관리"
-      :confirm-text="termsData.tadvPrvsLinkId ? '저장' : '등록'"
+      :confirm-text="mode === 'detail' ? '저장' : '등록'"
       @cancel="handleCancel"
       @close="handleCancel"
       @confirm="handleConfirm"
     >
       <template #content>
         <form class="form">
+          <FormItem label="메뉴ID">
+            <CustomInput
+              v-model="termsData.tadvPrvsLinkId"
+              placeholder="메뉴ID를 입력해주세요."
+            />
+          </FormItem>
           <FormItem label="메뉴명">
             <CustomInput
               v-model="termsData.tadvPrvsLinkNm"
