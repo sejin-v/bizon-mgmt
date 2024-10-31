@@ -4,6 +4,10 @@ import Feedback from './components/Feedback.vue';
 import SubjectiveFeedback from './components/SubjectiveFeedback.vue';
 
 const activeTab = ref('applyStatus');
+
+const handleChange = () => {
+  activeTab.value = 'subjectiveFeedback';
+};
 </script>
 
 <template>
@@ -18,7 +22,7 @@ const activeTab = ref('applyStatus');
           <ApplyStatus />
         </el-tab-pane>
         <el-tab-pane label="고객만족도평가" name="feedback">
-          <Feedback />
+          <Feedback @change="handleChange" />
         </el-tab-pane>
         <el-tab-pane label="고객만족도평가 (주관식)" name="subjectiveFeedback">
           <SubjectiveFeedback />

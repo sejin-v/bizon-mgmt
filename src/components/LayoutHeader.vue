@@ -67,7 +67,7 @@ const handleLogout = () => {
         </el-menu-item>
       </el-menu>
 
-      <button type="button" class="header__user">홍길동</button>
+      <button type="button" class="header__user"></button>
       <button type="button">
         <icon
           name="logout__line--fff"

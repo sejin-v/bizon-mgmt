@@ -24,6 +24,8 @@ const detailForm = ref({
   useYn: 'Y',
 });
 
+const initData = ref('');
+
 const vallidateBoardData = () => {
   if (
     !detailForm.value.atclKdCd ||
@@ -88,29 +90,54 @@ const handleCreateBoard = async () => {
   }
 };
 
-const handleChnageeMode = () => {
+const handleChnageeMode = async () => {
   if (detailForm.value.atclSno) {
+    if (initData.value !== JSON.stringify(detailForm.value)) {
+      confirmOption.content = h('p', null, [
+        h(
+          'div',
+          { style: 'text-align: center;' },
+          '작성중인 내용이 사라집니다.'
+        ),
+        h('div', { style: 'text-align: center;' }, '취소 하시겠습니까?'),
+      ]);
+      await openConfirm(confirmOption);
+    }
     isCreateMode.value = !isCreateMode.value;
   } else {
     router.push('/board');
   }
 };
 
+//
+//
 const handleDelete = async () => {
   const data = {
     atclKdCd: detailForm.value.atclKdCd,
     atclSno: detailForm.value.atclSno,
   };
   try {
+    confirmOption.hideCancelButton = false;
+    confirmOption.content = h('p', null, [
+      h('div', { style: 'text-align: center;' }, '삭제 하시겠습니까?'),
+      h('div', { style: 'text-align: center;' }, '삭제 후 되돌릴 수 없습니다.'),
+    ]);
+    await openConfirm(confirmOption);
     await request.post('/bizon/mgmt/api/board/delete', {
       ...data,
     });
+    confirmOption.hideCancelButton = true;
+
     confirmOption.content = '삭제 되었습니다.';
     await openConfirm(confirmOption);
     router.push('/board');
   } catch (error) {
     console.error(error);
   }
+};
+
+const handleMoveList = async () => {
+  router.back();
 };
 
 onMounted(async () => {
@@ -123,6 +150,7 @@ onMounted(async () => {
       params,
     });
     detailForm.value = result.data.data;
+    initData.value = JSON.stringify(detailForm.value);
   } else {
     isCreateMode.value = true;
   }
@@ -239,7 +267,7 @@ onMounted(async () => {
           <button
             type="button"
             class="btn__full--primary-md"
-            @click="router.back()"
+            @click="handleMoveList"
           >
             목록
           </button>

@@ -58,7 +58,7 @@ service.interceptors.response.use(
     }
 
     if (response.data.code.substr(0, 2) !== '20') {
-      // return Promise.reject(response.data)
+      return Promise.reject(response.data)
     }
 
 

@@ -37,6 +37,15 @@ const paginationOptions: IPaginationOptions = reactive({
   currentPage: 1,
   limit: 10,
 });
+
+const confirmOptions = reactive({
+  content: '',
+  center: true,
+  closeOnClickModal: true,
+  closeOnPressEscape: true,
+  hideCancelButton: true,
+});
+
 const menuUrlPopup = ref(false);
 const mode = ref('');
 const getParams = () => {
@@ -87,13 +96,27 @@ const handleConfirm = async () => {
     tadvPrvsLinkUrlAddr: termsData.value.tadvPrvsLinkUrlAddr,
     tadvPrvsLinkId: termsData.value.tadvPrvsLinkId,
   };
-  if (mode.value === 'detail') {
-    await request.post('/bizon/mgmt/api/terms/update', { ...data });
-    initTermsData();
-  } else {
-    await request.post('/bizon/mgmt/api/terms/insert', { ...data });
+  try {
+    if (mode.value === 'detail') {
+      await request.post('/bizon/mgmt/api/terms/update', { ...data });
+      initTermsData();
+    } else {
+      await request.post('/bizon/mgmt/api/terms/insert', { ...data });
+    }
+    handleSearch();
+    menuUrlPopup.value = false;
+  } catch (error: any) {
+    if (error.code === '40000000') {
+      confirmOptions.content = '잘못된 요청입니다.';
+      openConfirm(confirmOptions);
+      return;
+    }
+    if (error.code === '40400001') {
+      confirmOptions.content = '수정할 담당 영업사원 정보가 없습니다.';
+      openConfirm(confirmOptions);
+      return;
+    }
   }
-  menuUrlPopup.value = false;
 };
 const handleCancel = () => {
   menuUrlPopup.value = false;

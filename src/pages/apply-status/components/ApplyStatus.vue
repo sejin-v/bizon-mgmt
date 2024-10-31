@@ -2,7 +2,7 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import dayjs, { ManipulateType } from 'dayjs';
-import { IApplyData, IApplyParams, IModalPopup } from '~/types';
+import { IApplyData, IApplyParams } from '~/types';
 import { IPaginationOptions } from '~/types/pagination';
 
 const searchDate = ref([new Date(), new Date()]);
@@ -10,7 +10,7 @@ const searchedDate = ref([new Date(), new Date()]);
 const applyStatusList = ref<IApplyData[]>([]);
 const datePickerButton = ref();
 const downloadResonPopup = ref(false);
-const downloadReson = ref();
+const downloadReson = ref('JOB_REPO');
 
 const searchForm = reactive({
   applyDate: '',

@@ -293,6 +293,11 @@ onMounted(async () => {
         <el-table-column prop="rowNum" label="No" align="center" width="80" />
         <el-table-column prop="cntcStrtDt" align="center" width="150">
           <template #header> 비즈온<br />개통 일자 </template>
+          <template #default="scope">
+            {{
+              scope.row.cntcStrtDt ? dateFormatter(scope.row.cntcStrtDt) : '-'
+            }}
+          </template>
         </el-table-column>
         <el-table-column
           prop="entrNo"

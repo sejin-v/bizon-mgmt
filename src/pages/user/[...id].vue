@@ -40,9 +40,13 @@ const handleSaveUserData = () => {
     entrNo: userData.value.entrNo,
     cucoChrrNm: userData.value.cucoChrrNm,
     cucoChrrHpno: userData.value.cucoChrrHpno,
-    cucoEmalAddr: `${userData.value.cucoEmalAddr}@${userData.value.cucoEmalDomain}`,
+    cucoEmalAddr: userData.value.cucoEmalAddr
+      ? `${userData.value.cucoEmalAddr}@${userData.value.cucoEmalDomain}`
+      : '',
     bizEmpEmno: userData.value.bizEmpEmno,
-    bizEmpEmalAddr: `${userData.value.bizEmpEmalAddr}@${userData.value.bizEmpEmalDomain}`,
+    bizEmpEmalAddr: userData.value.bizEmpEmalAddr
+      ? `${userData.value.bizEmpEmalAddr}@${userData.value.bizEmpEmalDomain}`
+      : '',
     bizEmpHpno: userData.value.bizEmpHpno,
   };
   request.post('/bizon/mgmt/api/user-management/user-detail-update', {
@@ -57,10 +61,15 @@ onMounted(async () => {
     }
   );
   userData.value = result.data.data;
-  const bizEmpEmalAddr = result.data.data.bizEmpEmalAddr.split('@');
+  const bizEmpEmalAddr = result.data.data.bizEmpEmalAddr
+    ? result.data.data.bizEmpEmalAddr.split('@')
+    : '';
+
   userData.value.bizEmpEmalAddr = bizEmpEmalAddr[0];
   userData.value.bizEmpEmalDomain = bizEmpEmalAddr[1];
-  const cucoEmalAddr = result.data.data.cucoEmalAddr.split('@');
+  const cucoEmalAddr = result.data.data.cucoEmalAddr
+    ? result.data.data.cucoEmalAddr.split('@')
+    : '';
   userData.value.cucoEmalAddr = cucoEmalAddr[0];
   userData.value.cucoEmalDomain = cucoEmalAddr[1];
 });

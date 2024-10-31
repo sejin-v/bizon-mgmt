@@ -4,6 +4,10 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import dayjs, { ManipulateType } from 'dayjs';
 import { IFeedbackParams, IFeedbackData } from '~/types';
 
+const emit = defineEmits<{
+  (e: 'change'): void;
+}>();
+
 const searchDate = ref([
   new Date(dayjs().startOf('month').format('YYYY-MM-DD')),
   new Date(),
@@ -89,6 +93,9 @@ const selectedDate = computed(() => {
         : '';
 });
 
+const handleChange = () => {
+  emit('change');
+};
 onMounted(async () => {
   handleSearch();
 });
@@ -222,7 +229,7 @@ onMounted(async () => {
     </el-table-column>
   </el-table>
 
-  <div class="flex justify-end w-full mt-[32px]">
+  <div class="flex justify-end w-full mt-[32px]" @click="handleChange">
     <a href="javascript:void(0);" type="button" class="btn__full--primary-md"
       >주관식 답변보기</a
     >
