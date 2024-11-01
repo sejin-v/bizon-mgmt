@@ -3,8 +3,7 @@
   @apply flex items-center;
   @include space(10px);
   & {
-    @apply flex-1;
-    // width: 100%;
+    width: 100%;
   }
   &__btns {
     button {

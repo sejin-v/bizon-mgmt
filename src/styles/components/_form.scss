@@ -78,9 +78,6 @@
   &__item-area {
     @apply flex flex-1 flex-col;
     @include space($y:10px);
-    > .search-form__item {
-      @apply flex-wrap;
-    }
   }
   &__btn-area {
     @apply flex items-center;
@@ -100,7 +97,6 @@
   &__item {
     @apply flex items-center;
     @include space(19px);
-    gap: 10px;
 
     .el-select {
       width: 292px;
@@ -115,10 +111,9 @@
   }
   
     .search-form__item {
-      @apply flex-1;
-      max-width: 340px;
+      max-width: 366px;
       & + .search-form__item {
-        margin-left: 30px;
+        margin-left: 40px;
       }
     }
   }
