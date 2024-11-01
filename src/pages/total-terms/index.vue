@@ -62,6 +62,9 @@ const getParams = () => {
 const getTermsList = async (params: ITermsParams) => {
   const result = await request.get('/bizon/mgmt/api/terms/list', {
     params,
+    headers: {
+      'X-COMMAND': 'P05007',
+    },
   });
   return result.data.data;
 };
@@ -98,10 +101,26 @@ const handleConfirm = async () => {
   };
   try {
     if (mode.value === 'detail') {
-      await request.post('/bizon/mgmt/api/terms/update', { ...data });
+      await request.post(
+        '/bizon/mgmt/api/terms/update',
+        { ...data },
+        {
+          headers: {
+            'X-COMMAND': 'P05103',
+          },
+        }
+      );
       initTermsData();
     } else {
-      await request.post('/bizon/mgmt/api/terms/insert', { ...data });
+      await request.post(
+        '/bizon/mgmt/api/terms/insert',
+        { ...data },
+        {
+          headers: {
+            'X-COMMAND': 'P05103',
+          },
+        }
+      );
     }
     handleSearch();
     menuUrlPopup.value = false;

@@ -1,4 +1,4 @@
-import type { MessageOptions } from 'element-plus'
+import { dayjs, type MessageOptions } from 'element-plus'
 import type { IOpenConfirm } from '~/types/confirm'
 import type { IOpenAlert } from '~/types/alert'
 import type { IMenu } from '~/types/menu'
@@ -133,4 +133,23 @@ export const numberToKFormatter = (value: string | number): string => {
     return (value as number / 1000).toFixed(1)
   }
   return (value as number / 1000).toFixed(1)
+}
+
+export function makeRandom() {
+  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'
+  const string_length = 4
+  let randomString = ''
+  for (let i = 0; i < string_length; i++) {
+    const rnum = Math.floor(Math.random() * chars.length)
+    randomString += chars[rnum]
+  }
+  return randomString
+}
+
+export function generateLogKey() {
+  const dateTimeSecondFormat = dayjs().format('YYYYMMDDHHmmssSSS')
+  const first = makeRandom()
+  const second = makeRandom()
+
+  return `${dateTimeSecondFormat}${first}${second}`
 }

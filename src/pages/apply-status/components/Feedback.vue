@@ -32,6 +32,9 @@ const getFeedbackData = async (params: IFeedbackParams) => {
       '/bizon/mgmt/api/statistics/statisfaction-rating',
       {
         params,
+        headers: {
+          'X-COMMAND': 'P05005',
+        },
       }
     );
     searchedDate.value = searchDate.value;

@@ -56,6 +56,9 @@ const getMemberList = async (params: IUserParams) => {
       '/bizon/mgmt/api/user-management/user-list',
       {
         params,
+        headers: {
+          'X-COMMAND': 'P05002',
+        },
       }
     );
     return result.data.data;
@@ -136,6 +139,9 @@ const handleConfirm = async () => {
     '/bizon/mgmt/api/user-management/user-list-excel-download',
     {
       params,
+      headers: {
+        'X-COMMAND': 'P05101',
+      },
     }
   );
 

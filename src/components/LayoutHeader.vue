@@ -31,7 +31,15 @@ const handleSelect = (key: string, keyPath: string[]) => {
 };
 
 const handleLogout = () => {
-  request.post('/bizon/mgmt/api/account/logout');
+  request.post(
+    '/bizon/mgmt/api/account/logout',
+    {},
+    {
+      headers: {
+        'X-COMMAND': 'P05001',
+      },
+    }
+  );
   router.push('/login');
 };
 </script>

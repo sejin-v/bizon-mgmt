@@ -25,12 +25,12 @@ const baseUrl: string = import.meta.env.VITE_API_CONTEXT_PATH
 const service = axios.create({
   baseURL: baseUrl,
   headers: {
-    apiKey: '843227cfb6-fba97-b43b2-fa9c5-c59de18a6e',
   },
 })
 
 service.interceptors.request.use(
   async (config) => {
+    config.headers['X-LOGKEY'] = generateLogKey()
 
     // progressbar 시작
     NProgress.start()

@@ -29,7 +29,13 @@ const paginationOptions: IPaginationOptions = reactive({
   totalCount: 0,
   limit: 10,
 });
-
+const confirmOption = reactive({
+  content: '수정 되었습니다.',
+  center: true,
+  closeOnClickModal: true,
+  closeOnPressEscape: true,
+  hideCancelButton: true,
+});
 const getParams = () => {
   const params: IApplyParams = {
     icspRqstStartDt: dayjs(searchedDate.value[0]).format('YYYYMMDD'),
@@ -52,7 +58,12 @@ const getAppluData = async (params: IApplyParams) => {
   try {
     const result = await request.get(
       '/bizon/mgmt/api/statistics/speed-increase-status',
-      { params }
+      {
+        params,
+        headers: {
+          'X-COMMAND': 'P05004',
+        },
+      }
     );
 
     return result.data.data;
@@ -104,8 +115,8 @@ function handleCancel() {
 const handleConfirm = async () => {
   const params: IApplyParams = {
     exelDownRsnKdCd: 'JOB_REPO',
-    icspRqstStartDt: dayjs(searchedDate.value[0]).format('YYYY-MM-DD'),
-    icspRqstEndDt: dayjs(searchedDate.value[1]).format('YYYY-MM-DD'),
+    icspRqstStartDt: dayjs(searchedDate.value[0]).format('YYYYMMDD'),
+    icspRqstEndDt: dayjs(searchedDate.value[1]).format('YYYYMMDD'),
   };
   if (searchedForm.entrNo) {
     params.entrNo = searchedForm.entrNo;
@@ -113,15 +124,23 @@ const handleConfirm = async () => {
   if (searchedForm.brno) {
     params.brno = searchedForm.brno;
   }
-
-  await request.get(
-    '/bizon/mgmt/api/statistics/speed-increase-status-excel-download',
-    {
-      params,
+  try {
+    await request.get(
+      '/bizon/mgmt/api/statistics/speed-increase-status-excel-download',
+      {
+        params,
+        headers: {
+          'X-COMMAND': 'P05104',
+        },
+      }
+    );
+    downloadResonPopup.value = false;
+  } catch (error: any) {
+    if (error.code === '40412001') {
+      confirmOption.content = error.message;
+      openConfirm(confirmOption);
     }
-  );
-
-  downloadResonPopup.value = false;
+  }
 };
 
 const selectedDate = computed(() => {

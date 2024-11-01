@@ -50,9 +50,17 @@ const handleSaveBoard = async () => {
     atclSno: detailForm.value.atclSno,
   };
   try {
-    await request.post('/bizon/mgmt/api/board/update', {
-      ...data,
-    });
+    await request.post(
+      '/bizon/mgmt/api/board/update',
+      {
+        ...data,
+      },
+      {
+        headers: {
+          'X-COMMAND': 'P05009',
+        },
+      }
+    );
     confirmOption.content = '수정 되었습니다.';
     await openConfirm(confirmOption);
   } catch (error) {
@@ -64,6 +72,9 @@ const handleSaveBoard = async () => {
   };
   const result = await request.get('/bizon/mgmt/api/board/detail', {
     params,
+    headers: {
+      'X-COMMAND': 'P05009',
+    },
   });
   detailForm.value = result.data.data;
   handleChnageeMode();
@@ -79,9 +90,17 @@ const handleCreateBoard = async () => {
     useYn: detailForm.value.useYn,
   };
   try {
-    await request.post('/bizon/mgmt/api/board/create', {
-      ...data,
-    });
+    await request.post(
+      '/bizon/mgmt/api/board/create',
+      {
+        ...data,
+      },
+      {
+        headers: {
+          'X-COMMAND': 'P05009',
+        },
+      }
+    );
     confirmOption.content = '등록 되었습니다.';
     await openConfirm(confirmOption);
     handleChnageeMode();
@@ -123,9 +142,17 @@ const handleDelete = async () => {
       h('div', { style: 'text-align: center;' }, '삭제 후 되돌릴 수 없습니다.'),
     ]);
     await openConfirm(confirmOption);
-    await request.post('/bizon/mgmt/api/board/delete', {
-      ...data,
-    });
+    await request.post(
+      '/bizon/mgmt/api/board/delete',
+      {
+        ...data,
+      },
+      {
+        headers: {
+          'X-COMMAND': 'P05009',
+        },
+      }
+    );
     confirmOption.hideCancelButton = true;
 
     confirmOption.content = '삭제 되었습니다.';
@@ -148,6 +175,9 @@ onMounted(async () => {
     };
     const result = await request.get('/bizon/mgmt/api/board/detail', {
       params,
+      headers: {
+        'X-COMMAND': 'P05009',
+      },
     });
     detailForm.value = result.data.data;
     initData.value = JSON.stringify(detailForm.value);

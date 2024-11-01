@@ -58,7 +58,12 @@ const getParams = () => {
 const getSubjectiveFeedbackData = async (params: ISubjectFeedbackParams) => {
   const result = await request.get(
     '/bizon/mgmt/api/statistics/statisfaction-rating-subjective',
-    { params }
+    {
+      params,
+      headers: {
+        'X-COMMAND': 'P05006',
+      },
+    }
   );
   return result.data.data;
 };

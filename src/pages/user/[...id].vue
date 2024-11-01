@@ -49,15 +49,26 @@ const handleSaveUserData = () => {
       : '',
     bizEmpHpno: userData.value.bizEmpHpno,
   };
-  request.post('/bizon/mgmt/api/user-management/user-detail-update', {
-    ...data,
-  });
+  request.post(
+    '/bizon/mgmt/api/user-management/user-detail-update',
+    {
+      ...data,
+    },
+    {
+      headers: {
+        'X-COMMAND': 'P05003',
+      },
+    }
+  );
 };
 onMounted(async () => {
   const result = await request.get(
     '/bizon/mgmt/api/user-management/user-detail',
     {
       params: { encEntrNo: route.params.id },
+      headers: {
+        'X-COMMAND': 'P05003',
+      },
     }
   );
   userData.value = result.data.data;

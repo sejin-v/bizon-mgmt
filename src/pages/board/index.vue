@@ -46,6 +46,9 @@ const getParams = () => {
 const getBoardList = async (params: IBoardParams) => {
   const result = await request.get('/bizon/mgmt/api/board/list', {
     params,
+    headers: {
+      'X-COMMAND': 'P05008',
+    },
   });
   return result.data.data;
 };
