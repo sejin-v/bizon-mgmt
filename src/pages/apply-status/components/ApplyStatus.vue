@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import axios from 'axios';
 import dayjs, { ManipulateType } from 'dayjs';
 import { IApplyData, IApplyParams } from '~/types';
 import { IPaginationOptions } from '~/types/pagination';
@@ -30,7 +31,7 @@ const paginationOptions: IPaginationOptions = reactive({
   limit: 10,
 });
 const confirmOption = reactive({
-  content: '수정 되었습니다.',
+  content: '',
   center: true,
   closeOnClickModal: true,
   closeOnPressEscape: true,
@@ -105,9 +106,15 @@ const closeMenu = () => {
   datePickerButton.value.closeMenu();
 };
 
-function openDownloadResonPopup() {
+const openDownloadResonPopup = async () => {
+  if (!applyStatusList.value?.length) {
+    // 오류 처리 로직 추가 (예: 메시지 표시)
+    confirmOption.content = '엑셀 다운로드할 데이터가 없습니다.';
+    await openConfirm(confirmOption);
+    return;
+  }
   downloadResonPopup.value = true;
-}
+};
 function handleCancel() {
   downloadResonPopup.value = false;
 }
@@ -124,23 +131,32 @@ const handleConfirm = async () => {
   if (searchedForm.brno) {
     params.brno = searchedForm.brno;
   }
-  try {
-    await request.get(
-      '/bizon/mgmt/api/statistics/speed-increase-status-excel-download',
-      {
-        params,
-        headers: {
-          'X-COMMAND': 'P05104',
-        },
-      }
-    );
-    downloadResonPopup.value = false;
-  } catch (error: any) {
-    if (error.code === '40412001') {
-      confirmOption.content = error.message;
-      openConfirm(confirmOption);
-    }
-  }
+
+  axios({
+    url: '/bizon/mgmt/api/statistics/speed-increase-status-excel-download',
+    params,
+    headers: {
+      'X-COMMAND': 'P05104',
+    },
+    method: 'GET',
+    responseType: 'blob',
+  })
+    .then((response) => {
+      const blob = new Blob([response.data]); // 데이터가 유효한 경우 blob 생성
+      const url = window.URL.createObjectURL(blob);
+
+      const link = window.document.createElement('a');
+      link.href = url;
+      link.download = '주문/취소내역.xlsx';
+      link.click();
+      link.remove();
+
+      window.URL.revokeObjectURL(url);
+      downloadResonPopup.value = false;
+    })
+    .catch((error) => {
+      console.error('Error downloading Excel file:', error);
+    });
 };
 
 const selectedDate = computed(() => {

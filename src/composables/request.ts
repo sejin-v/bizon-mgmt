@@ -26,6 +26,7 @@ const service = axios.create({
   baseURL: baseUrl,
   headers: {
   },
+
 })
 
 service.interceptors.request.use(
@@ -57,7 +58,7 @@ service.interceptors.response.use(
       return
     }
 
-    if (response.data.code.substr(0, 2) !== '20') {
+    if (response.data.code?.substr(0, 2) !== '20') {
       return Promise.reject(response.data)
     }
 

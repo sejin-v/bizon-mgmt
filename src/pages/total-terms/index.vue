@@ -182,6 +182,7 @@ onMounted(async () => {
             :options="searchOptionList"
           />
           <CustomInput
+            @keyupEnter="handleSearch"
             v-model="searchForm.keyword"
             placeholder="검색어를 입력해주세요."
             class="flex-1"

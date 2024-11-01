@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import axios from 'axios';
 import dayjs, { ManipulateType } from 'dayjs';
 import { IPaginationOptions } from '~/types';
 import { IUserData, IUserParams } from '~/types';
@@ -10,8 +11,14 @@ const searchDate = ref([new Date(), new Date()]);
 const searchedDate = ref([new Date(), new Date()]);
 const datePickerButton = ref();
 const downloadResonPopup = ref(false);
-const downloadReson = ref('');
-
+const downloadReson = ref('JOB_REPO');
+const confirmOption = reactive({
+  content: '',
+  center: true,
+  closeOnClickModal: true,
+  closeOnPressEscape: true,
+  hideCancelButton: true,
+});
 const searchForm = reactive({
   entrNo: '',
   brno: '',
@@ -117,9 +124,15 @@ const closeMenu = () => {
   datePickerButton.value.closeMenu();
 };
 
-function openDownloadResonPopup() {
+const openDownloadResonPopup = async () => {
+  if (!userList.value?.length) {
+    // 오류 처리 로직 추가 (예: 메시지 표시)
+    confirmOption.content = '엑셀 다운로드할 데이터가 없습니다.';
+    await openConfirm(confirmOption);
+    return;
+  }
   downloadResonPopup.value = true;
-}
+};
 const handleConfirm = async () => {
   const params: IUserParams = {
     exelDownRsnKdCd: 'JOB_REPO',
@@ -135,17 +148,32 @@ const handleConfirm = async () => {
   if (searchedForm.cucoChrrNm) {
     params.cucoChrrNm = searchedForm.cucoChrrNm;
   }
-  await request.get(
-    '/bizon/mgmt/api/user-management/user-list-excel-download',
-    {
-      params,
-      headers: {
-        'X-COMMAND': 'P05101',
-      },
-    }
-  );
 
-  downloadResonPopup.value = false;
+  axios({
+    url: '/bizon/mgmt/api/user-management/user-list-excel-download',
+    params,
+    headers: {
+      'X-COMMAND': 'P05101',
+    },
+    method: 'GET',
+    responseType: 'blob',
+  })
+    .then((response) => {
+      const blob = new Blob([response.data]); // 데이터가 유효한 경우 blob 생성
+      const url = window.URL.createObjectURL(blob);
+
+      const link = window.document.createElement('a');
+      link.href = url;
+      link.download = '회원 관리.xlsx';
+      link.click();
+      link.remove();
+
+      window.URL.revokeObjectURL(url);
+      downloadResonPopup.value = false;
+    })
+    .catch((error) => {
+      console.error('Error downloading Excel file:', error);
+    });
 };
 function handleCancel() {
   downloadResonPopup.value = false;
