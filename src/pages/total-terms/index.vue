@@ -30,6 +30,7 @@ const termsData = ref<ITermsData>({
   tadvPrvsLinkId: '',
   tadvPrvsLinkNm: '',
   tadvPrvsLinkUrlAddr: '',
+  updateTadvPrvsLinkId: '',
 });
 
 const paginationOptions: IPaginationOptions = reactive({
@@ -80,6 +81,7 @@ const handleRowClick = async (target: ITermsData) => {
     },
   });
   termsData.value = result.data.data;
+  termsData.value.updateTadvPrvsLinkId = termsData.value.tadvPrvsLinkId;
   mode.value = 'detail';
   menuUrlPopup.value = true;
 };
@@ -96,6 +98,7 @@ const initTermsData = () => {
     tadvPrvsLinkId: '',
     tadvPrvsLinkNm: '',
     tadvPrvsLinkUrlAddr: '',
+    updateTadvPrvsLinkId: '',
   };
 };
 const handleConfirm = async () => {
@@ -110,6 +113,7 @@ const handleConfirm = async () => {
   };
   try {
     if (mode.value === 'detail') {
+      data.updateTadvPrvsLinkId = termsData.value.updateTadvPrvsLinkId;
       await request.post(
         '/bizon/mgmt/api/terms/update',
         { ...data },
@@ -270,7 +274,7 @@ onMounted(async () => {
         <form class="form">
           <FormItem label="메뉴ID">
             <CustomInput
-              v-model="termsData.tadvPrvsLinkId"
+              v-model="termsData.updateTadvPrvsLinkId"
               placeholder="메뉴ID를 입력해주세요."
             />
           </FormItem>

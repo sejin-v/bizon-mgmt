@@ -6,6 +6,7 @@ export interface ITermsData {
   tadvPrvsLinkId: string
   tadvPrvsLinkNm: string
   tadvPrvsLinkUrlAddr: string
+  updateTadvPrvsLinkId: string
 }
 
 
@@ -14,6 +15,7 @@ export interface ITermsParams {
   [key: string]: any
   tadvPrvsLinkNm?: string
   tadvPrvsLinkUrlAddr?: string
+  updateTadvPrvsLinkId?: string
   page?: number
   perPageNum: number
 }
