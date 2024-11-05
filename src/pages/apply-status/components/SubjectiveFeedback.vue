@@ -139,10 +139,25 @@ const closeMenu = () => {
   datePickerButton.value.closeMenu();
 };
 
-function openDownloadResonPopup(target: ISubjectFeedbackData) {
-  subjectFeedbackData.value = target;
+const handleSubjectFeedbackClick = async (target: ISubjectFeedbackData) => {
+  const params = {
+    evalQstnNo: target.evalQstnNo,
+    encEntrNo: target.encEntrNo,
+    trfEvetOccrDt: target.trfEvetOccrDt,
+  };
+  const result = await request.get(
+    '/bizon/mgmt/api/statistics/statisfaction-rating-subjective-detail',
+    {
+      params,
+      headers: {
+        'X-COMMAND': 'P05102',
+      },
+    }
+  );
+  subjectFeedbackData.value = result.data.data;
   downloadResonPopup.value = true;
-}
+};
+
 function handleCancel() {
   downloadResonPopup.value = false;
 }
@@ -262,7 +277,7 @@ const selectedDate = computed(() => {
     :data="subjectFeedbackList"
     style="width: 100%"
     empty-text="조회된 내용이 없습니다."
-    @row-click="openDownloadResonPopup"
+    @row-click="handleSubjectFeedbackClick"
   >
     <el-table-column prop="rowNum" label="No" align="center" width="80" />
     <el-table-column

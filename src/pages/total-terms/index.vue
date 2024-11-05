@@ -69,8 +69,17 @@ const getTermsList = async (params: ITermsParams) => {
   return result.data.data;
 };
 
-const handleRowClick = (target: ITermsData) => {
-  termsData.value = { ...target };
+const handleRowClick = async (target: ITermsData) => {
+  const params = {
+    tadvPrvsLinkId: target.tadvPrvsLinkId,
+  };
+  const result = await request.get('/bizon/mgmt/api/terms/detail', {
+    params,
+    headers: {
+      'X-COMMAND': 'P05103',
+    },
+  });
+  termsData.value = result.data.data;
   mode.value = 'detail';
   menuUrlPopup.value = true;
 };

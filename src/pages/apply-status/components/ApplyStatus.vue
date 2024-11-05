@@ -147,7 +147,7 @@ const handleConfirm = async () => {
 
       const link = window.document.createElement('a');
       link.href = url;
-      link.download = '주문/취소내역.xlsx';
+      link.download = '증속 신청현황.xlsx';
       link.click();
       link.remove();
 
