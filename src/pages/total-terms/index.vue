@@ -125,6 +125,7 @@ const handleConfirm = async () => {
       );
       initTermsData();
     } else {
+      data.tadvPrvsLinkId = termsData.value.updateTadvPrvsLinkId;
       await request.post(
         '/bizon/mgmt/api/terms/insert',
         { ...data },
