@@ -258,13 +258,13 @@ const selectedDate = computed(() => {
           @keyupEnter="handleSearch"
         />
       </SearchItem>
-      <SearchItem label="청약트래픽">
+      <SearchItemSub label="청약트래픽">
         <CustomDropdown
           v-model="searchForm.applicationTraffic"
           placeholder="선택하세요"
           :options="applicationTrafficOption"
         />
-      </SearchItem>
+      </SearchItemSub>
     </SearchItem>
   </SearchForm>
 
