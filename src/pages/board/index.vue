@@ -76,8 +76,6 @@ const handlePageChange = async () => {
 
 const route = useRoute();
 const handleRowClick = (target) => {
-  console.log(target.atclSno);
-  console.log(target.atclKdCd);
   router.push({
     path: `/board/detail`,
     query: { atclSno: target.atclSno, atclKdCd: target.atclKdCd },
