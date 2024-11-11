@@ -11,7 +11,8 @@ const searchedDate = ref([new Date(), new Date()]);
 const applyStatusList = ref<IApplyData[]>([]);
 const datePickerButton = ref();
 const downloadResonPopup = ref(false);
-const downloadReson = ref('JOB_REPO');
+const downloadResonList = ref();
+const downloadReson = ref('');
 
 const searchForm = reactive({
   applyDate: '',
@@ -113,6 +114,17 @@ const openDownloadResonPopup = async () => {
     await openConfirm(confirmOption);
     return;
   }
+  const params = {
+    cdGrp: 'EXEL_DOWN_RSN_KD_CD',
+  };
+  const result = await request.get('/bizon/mgmt/api/common/code/list', {
+    params,
+    headers: {
+      'X-COMMAND': 'P05104',
+    },
+  });
+  downloadResonList.value = result.data.data.codeList;
+  downloadReson.value = downloadResonList.value[0].cd;
   downloadResonPopup.value = true;
 };
 function handleCancel() {
@@ -121,7 +133,7 @@ function handleCancel() {
 
 const handleConfirm = async () => {
   const params: IApplyParams = {
-    exelDownRsnKdCd: 'JOB_REPO',
+    exelDownRsnKdCd: downloadReson.value,
     icspRqstStartDt: dayjs(searchedDate.value[0]).format('YYYYMMDD'),
     icspRqstEndDt: dayjs(searchedDate.value[1]).format('YYYYMMDD'),
   };
@@ -137,6 +149,7 @@ const handleConfirm = async () => {
     params,
     headers: {
       'X-COMMAND': 'P05104',
+      'X-LOGKEY': generateLogKey(),
     },
     method: 'GET',
     responseType: 'blob',
@@ -432,9 +445,9 @@ onMounted(async () => {
       &#42; 문서 다운로드 사유를 선택해주세요.
       <div class="mt-4 box--f3f">
         <el-radio-group v-model="downloadReson" class="flex-col gap-2.5">
-          <el-radio value="JOB_REPO"> 업무 보고용 </el-radio>
-          <el-radio value="SMP_DATA_COMP"> 단순 데이터 대조용 </el-radio>
-          <el-radio value="EVET_TRGP_EXTR"> 이벤트 대상자 추출용 </el-radio>
+          <el-radio v-for="reson in downloadResonList" :value="reson.cd">
+            {{ reson.cdNm }}
+          </el-radio>
         </el-radio-group>
       </div>
     </template>
