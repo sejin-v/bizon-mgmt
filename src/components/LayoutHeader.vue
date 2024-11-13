@@ -7,7 +7,7 @@ interface IMenu {
 const router = useRouter();
 const route = useRoute();
 const defaultMenu = ref(route.fullPath);
-
+const elmenu = ref();
 const menuList = ref<IMenu[]>([
   {
     menuId: '/user',
@@ -26,7 +26,7 @@ const menuList = ref<IMenu[]>([
     menuName: '게시판 관리',
   },
 ]);
-const handleSelect = (key: string, keyPath: string[]) => {
+const handleSelect = (key: string) => {
   router.push(key);
 };
 
@@ -42,11 +42,15 @@ const handleLogout = () => {
   );
   router.push('/login');
 };
+
+const handleClick = () => {
+  elmenu.value[0].handleClick('/user');
+};
 </script>
 
 <template>
   <header class="header">
-    <h1 class="logo">
+    <h1 class="logo" @click="handleClick">
       <a href="javascript:void(0);">
         <icon
           name="logo-lg--fff"
@@ -64,12 +68,13 @@ const handleLogout = () => {
         mode="horizontal"
         :default-active="defaultMenu"
         :ellipsis="false"
-        @select="handleSelect"
       >
         <el-menu-item
+          ref="elmenu"
           v-for="(menu, index) in menuList"
           :key="`mgmt=menu-list-${menu.menuId}`"
           :index="menu.menuId"
+          @click="handleSelect(menu.menuId)"
         >
           {{ menu.menuName }}
         </el-menu-item>

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { IToastType } from '~/example/types/toast';
 import { IPaginationOptions, ITermsData, ITermsParams } from '~/types';
 
 const searchOptionList = [
@@ -124,6 +125,11 @@ const handleConfirm = async () => {
         }
       );
       initTermsData();
+      openToast({
+        message: '저장되었습니다.',
+        type: IToastType.SUCCESS,
+        showClose: true,
+      });
     } else {
       data.tadvPrvsLinkId = termsData.value.updateTadvPrvsLinkId;
       await request.post(
@@ -135,6 +141,11 @@ const handleConfirm = async () => {
           },
         }
       );
+      openToast({
+        message: '등록되었습니다.',
+        type: IToastType.SUCCESS,
+        showClose: true,
+      });
     }
     handleSearch();
     menuUrlPopup.value = false;

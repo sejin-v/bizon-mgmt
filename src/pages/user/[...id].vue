@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { IToastType } from '~/example/types/toast';
 import { IUserDetailData } from '~/types';
 
 const router = useRouter();
@@ -35,7 +36,7 @@ const handleChange = (target: string, domain: string) => {
   userData.value[target] = domain;
 };
 
-const handleSaveUserData = () => {
+const handleSaveUserData = async () => {
   const data = {
     entrNo: userData.value.entrNo,
     cucoChrrNm: userData.value.cucoChrrNm,
@@ -49,19 +50,34 @@ const handleSaveUserData = () => {
       : '',
     bizEmpHpno: userData.value.bizEmpHpno,
   };
-  request.post(
-    '/bizon/mgmt/api/user-management/user-detail-update',
-    {
-      ...data,
-    },
-    {
-      headers: {
-        'X-COMMAND': 'P05003',
+  try {
+    request.post(
+      '/bizon/mgmt/api/user-management/user-detail-update',
+      {
+        ...data,
       },
-    }
-  );
+      {
+        headers: {
+          'X-COMMAND': 'P05003',
+        },
+      }
+    );
+    await openToast({
+      message: '저장되었습니다.',
+      type: IToastType.SUCCESS,
+      showClose: true,
+    });
+    getUserData();
+  } catch (error: any) {
+    openToast({
+      message: error.response.data.message,
+      type: IToastType.ERROR,
+      showClose: true,
+    });
+  }
 };
-onMounted(async () => {
+
+const getUserData = async () => {
   const result = await request.get(
     '/bizon/mgmt/api/user-management/user-detail',
     {
@@ -83,6 +99,9 @@ onMounted(async () => {
     : '';
   userData.value.cucoEmalAddr = cucoEmalAddr[0];
   userData.value.cucoEmalDomain = cucoEmalAddr[1];
+};
+onMounted(async () => {
+  getUserData();
 });
 </script>
 
