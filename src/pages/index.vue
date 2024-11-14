@@ -7,9 +7,11 @@
 // log.info('on mounted', router.options.routes)
 // })
 const router = useRouter();
-
-const moveMainScreen = () => {
-  router.push('/user');
+const moveMainScreen = async () => {
+  try {
+    await request.get('/bizon/mgmt/api/manager');
+    router.push('/user');
+  } catch (error) {}
 };
 moveMainScreen();
 </script>

@@ -55,7 +55,7 @@ service.interceptors.response.use(
     const { router, route } = useRouterStore()
 
     if (response.data.code === '40100001') {
-      window.location.href = 'http://192.168.100.91:8080/bizon/mgmt/api/okta/login'
+      window.location.href = `${window.location.origin}/bizon/mgmt/api/okta/login`
     }
     if (response.data.code?.substr(0, 2) !== '20') {
       return Promise.reject(response.data)
