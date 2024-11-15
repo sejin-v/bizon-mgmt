@@ -31,27 +31,32 @@ const handleSelect = (key: string) => {
 };
 
 const handleLogout = () => {
-  request.post(
-    '/bizon/mgmt/api/account/logout',
-    {},
-    {
-      headers: {
-        'X-COMMAND': 'P05001',
-      },
-    }
-  );
-  router.push('/login');
+  window.location.href = `${window.location.origin}/bizon/mgmt/api/okta/logout`;
+  // request.post(
+  //   '/bizon/mgmt/api/account/logout',
+  //   {},
+  //   {
+  //     headers: {
+  //       'X-COMMAND': 'P05001',
+  //     },
+  //   }
+  // );
+  // router.push('/login');
 };
 
 const handleClick = () => {
-  elmenu.value[0].handleClick('/user');
+  if (route.fullPath === '/user') {
+    location.reload();
+  } else {
+    elmenu.value[0].handleClick('/user');
+  }
 };
 </script>
 
 <template>
   <header class="header">
     <h1 class="logo" @click="handleClick">
-      <a href="javascript:void(0);">
+      <a>
         <icon
           name="logo-lg--fff"
           width="104"
