@@ -13,6 +13,7 @@ const confirmOption = reactive({
   hideCancelButton: true,
 });
 const detailForm = ref({
+  preAtclKdCd: '',
   atclCntn: '',
   atclKdCd: 'ANNC',
   atclSno: '',
@@ -43,7 +44,8 @@ const vallidateBoardData = () => {
 const handleSaveBoard = async () => {
   if (!vallidateBoardData()) return;
   const data = {
-    atclKdCd: detailForm.value.atclKdCd,
+    atclKdCd: detailForm.value.preAtclKdCd,
+    changeAtclKdCd: detailForm.value.atclKdCd,
     atclTit: detailForm.value.atclTit,
     atclCntn: detailForm.value.atclCntn,
     useYn: detailForm.value.useYn,
@@ -66,18 +68,8 @@ const handleSaveBoard = async () => {
   } catch (error) {
     console.error(error);
   }
-  const params = {
-    atclKdCd: route.query.atclKdCd,
-    atclSno: route.query.atclSno,
-  };
-  const result = await request.get('/bizon/mgmt/api/board/detail', {
-    params,
-    headers: {
-      'X-COMMAND': 'P05009',
-    },
-  });
-  detailForm.value = result.data.data;
-  handleChnageeMode();
+
+  handleChnageeMode(false);
 };
 
 const handleCreateBoard = async () => {
@@ -103,15 +95,15 @@ const handleCreateBoard = async () => {
     );
     confirmOption.content = '등록 되었습니다.';
     await openConfirm(confirmOption);
-    handleChnageeMode();
+    handleChnageeMode(false);
   } catch (error) {
     console.error(error);
   }
 };
 
-const handleChnageeMode = async () => {
+const handleChnageeMode = async (cancel: boolean) => {
   if (detailForm.value.atclSno) {
-    if (initData.value !== JSON.stringify(detailForm.value)) {
+    if (cancel && initData.value !== JSON.stringify(detailForm.value)) {
       confirmOption.content = h('p', null, [
         h(
           'div',
@@ -123,6 +115,18 @@ const handleChnageeMode = async () => {
       await openConfirm(confirmOption);
     }
     isCreateMode.value = !isCreateMode.value;
+    const params = {
+      atclKdCd: route.query.atclKdCd,
+      atclSno: route.query.atclSno,
+    };
+    const result = await request.get('/bizon/mgmt/api/board/detail', {
+      params,
+      headers: {
+        'X-COMMAND': 'P05009',
+      },
+    });
+    detailForm.value = result.data.data;
+    detailForm.value.preAtclKdCd = result.data.data.atclKdCd;
   } else {
     router.push('/board');
   }
@@ -258,7 +262,7 @@ onMounted(async () => {
           <button
             type="button"
             class="btn__line--negative-md"
-            @click="handleChnageeMode"
+            @click="handleChnageeMode(true)"
           >
             취소
           </button>
@@ -290,7 +294,7 @@ onMounted(async () => {
           <button
             type="button"
             class="btn__line--primary-md"
-            @click="handleChnageeMode"
+            @click="handleChnageeMode(false)"
           >
             수정
           </button>
