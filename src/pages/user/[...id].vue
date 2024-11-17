@@ -45,13 +45,14 @@ const handleSaveUserData = async () => {
       ? `${userData.value.cucoEmalAddr}@${userData.value.cucoEmalDomain}`
       : '',
     bizEmpEmno: userData.value.bizEmpEmno,
+    bizEmpNm: userData.value.bizEmpNm,
     bizEmpEmalAddr: userData.value.bizEmpEmalAddr
       ? `${userData.value.bizEmpEmalAddr}@${userData.value.bizEmpEmalDomain}`
       : '',
     bizEmpHpno: userData.value.bizEmpHpno,
   };
   try {
-    request.post(
+    await request.post(
       '/bizon/mgmt/api/user-management/user-detail-update',
       {
         ...data,
@@ -69,11 +70,39 @@ const handleSaveUserData = async () => {
     });
     getUserData();
   } catch (error: any) {
+    console.log(error);
+    if (error.code === '40440001') {
+      openToast({
+        message: error.message,
+        type: IToastType.ERROR,
+        showClose: true,
+      });
+      return;
+    }
+    const message = ref('');
+    if (error.data.includes('bizEmpEmalAddr')) {
+      message.value = '담당 영업사원 이메일을 확인하세요.';
+    }
+    if (error.data.includes('bizEmpHpno')) {
+      message.value = '담당 영업사원 연락처는 필수값 입니다.';
+    }
+
+    if (error.data.includes('cucoChrrNm')) {
+      message.value = '고객사 담당자 명은 필수값 입니다.';
+    }
+    if (error.data.includes('cucoChrrNm')) {
+      message.value = '고객사 담당자 명은 필수값 입니다.';
+    }
+
+    if (error.data.includes('cucoEmalAddr')) {
+      message.value = '고객사 담당자 이메일을 확인하세요.';
+    }
     openToast({
-      message: error.response.data.message,
+      message: message.value,
       type: IToastType.ERROR,
       showClose: true,
     });
+    return;
   }
 };
 
@@ -100,6 +129,17 @@ const getUserData = async () => {
   userData.value.cucoEmalAddr = cucoEmalAddr[0];
   userData.value.cucoEmalDomain = cucoEmalAddr[1];
 };
+
+const handleUpdate = (target: string) => {
+  userData.value.bizEmpHpno = target;
+};
+
+const handleUpdateCuco = (target: string) => {
+  userData.value.cucoChrrHpno = target;
+};
+const handleMovePage = () => {
+  router.push('/user');
+};
 onMounted(async () => {
   getUserData();
 });
@@ -120,12 +160,12 @@ onMounted(async () => {
           <FormItem label="가입 번호">
             {{ userData.entrNo }}
           </FormItem>
-          <FormItem label="종속 신청 가능 여부">
+          <!-- <FormItem label="종속 신청 가능 여부">
             <el-radio-group v-model="applyStatus">
               <el-radio value="Y"> Y </el-radio>
               <el-radio value="N"> N </el-radio>
             </el-radio-group>
-          </FormItem>
+          </FormItem> -->
         </FormItem>
         <FormItem group>
           <FormItem label="사업자 번호">
@@ -138,7 +178,11 @@ onMounted(async () => {
             <CustomInput v-model="userData.cucoChrrNm" max-length="20" />
           </FormItem>
           <FormItem label="고객사 담당자 연락처">
-            <CustomInput v-model="userData.cucoChrrHpno" />
+            <CustomPhoneInput
+              max-length="13"
+              :value="userData.cucoChrrHpno"
+              @update="handleUpdateCuco"
+            />
           </FormItem>
         </FormItem>
         <FormItem label="고객사 담당자 이메일">
@@ -155,7 +199,11 @@ onMounted(async () => {
             <CustomInput v-model="userData.bizEmpNm" max-length="20" />
           </FormItem>
           <FormItem label="담당 영업사원 연락처">
-            <CustomInput v-model="userData.bizEmpHpno" />
+            <CustomPhoneInput
+              max-length="13"
+              :value="userData.bizEmpHpno"
+              @update="handleUpdate"
+            />
           </FormItem>
         </FormItem>
         <FormItem label="담당 영업사원 이메일">
@@ -172,7 +220,7 @@ onMounted(async () => {
         <button
           type="button"
           class="btn__line--primary-md"
-          @click="router.back()"
+          @click="handleMovePage"
         >
           목록으로
         </button>

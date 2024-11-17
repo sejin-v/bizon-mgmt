@@ -519,3 +519,24 @@ export function enumToArr<T>(e: T): T[keyof T][] {
 export function dateFormatter(date: string) {
   return dayjs(date).format('YYYY-MM-DD');
 };
+
+
+export function formatPhoneNumber(phoneNumber: string): string {
+  const numericValue = phoneNumber.replace(/\D/g, '') // 숫자만 추출
+
+  // 0으로 시작하지 않으면 최대 12글자까지만 입력 허용
+  // if (!numericValue.startsWith('0')) {
+  //   return numericValue.slice(0, 11) // 숫자가 0으로 시작하지 않으면 -없이 12글자까지만 허용
+  // }
+
+  // 숫자가 4글자 이상일 때와 8글자 이상일 때 자동으로 - 추가
+  if (numericValue.length >= 8) {
+    return numericValue.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3')
+  }
+  else if (numericValue.length >= 4) {
+    return numericValue.replace(/(\d{3})(\d{1,4})/, '$1-$2')
+  }
+
+  // 기본적으로 숫자가 3글자 이하일 때는 그대로 반환
+  return numericValue
+}

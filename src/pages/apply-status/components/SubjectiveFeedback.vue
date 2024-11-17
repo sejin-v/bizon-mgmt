@@ -29,7 +29,7 @@ const searchedForm = reactive({
   applicationTraffic: '',
 });
 
-const applicationTrafficOption = [{ label: '미정', value: '미정' }];
+// const applicationTrafficOption = [{ label: '미정', value: '미정' }];
 
 const subjectFeedbackList = ref<ISubjectFeedbackData[]>();
 const subjectFeedbackData = ref<ISubjectFeedbackData>();
@@ -258,13 +258,13 @@ const selectedDate = computed(() => {
           @keyupEnter="handleSearch"
         />
       </SearchItem>
-      <SearchItemSub label="청약트래픽">
+      <!-- <SearchItemSub label="청약트래픽">
         <CustomDropdown
           v-model="searchForm.applicationTraffic"
           placeholder="선택하세요"
           :options="applicationTrafficOption"
         />
-      </SearchItemSub>
+      </SearchItemSub> -->
     </SearchItem>
   </SearchForm>
 
@@ -360,6 +360,7 @@ const selectedDate = computed(() => {
     :title="subjectFeedbackData?.evalQstnCntn"
     :desc="subjectFeedbackData?.evalRegDttm"
     :show-close="false"
+    size="lg"
   >
     <template #content>
       {{ subjectFeedbackData?.evalAnsr }}

@@ -44,7 +44,7 @@ const getParams = () => {
     lastLoginDttmStart: dayjs(searchedDate.value[0]).format('YYYY-MM-DD'),
     lastLoginDttmEnd: dayjs(searchedDate.value[1]).format('YYYY-MM-DD'),
     perPageNum: 10,
-    page: 1,
+    page: paginationOptions.currentPage,
   };
   if (searchedForm.cucoChrrNm) {
     params.cucoChrrNm = searchedForm.cucoChrrNm;
@@ -269,6 +269,7 @@ onMounted(async () => {
               :day-names="['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']"
               :enable-time-picker="false"
               :year-first="true"
+              min-date="2024"
               placeholder="시작일 종료일을 입력해 주세요"
             >
               <template #action-preview />

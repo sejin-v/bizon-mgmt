@@ -99,6 +99,25 @@ const selectedDate = computed(() => {
 const handleChange = () => {
   emit('change');
 };
+
+const getUserDetail = (data: any, index: number, target: any) => {
+  let maxObject = target[0];
+  let maxObjectIndex = 0;
+
+  // 배열을 순회하며 최댓값 비교
+  for (let i = 1; i < target.length; i++) {
+    if (target[i].userTotalCount > maxObject.userTotalCount) {
+      maxObject = target[i];
+      maxObjectIndex = i;
+    }
+  }
+
+  // return maxObject;
+  if (maxObjectIndex === index) {
+    return `<em>${data.evalScorName}(${data.userTotalCount}명)${index === target.length - 1 ? '' : ','}</em> `;
+  }
+  return `${data.evalScorName}(${data.userTotalCount}명)${index === target.length - 1 ? '' : ','} `;
+};
 onMounted(async () => {
   handleSearch();
 });
@@ -219,14 +238,18 @@ onMounted(async () => {
         <template
           v-for="(data, i) in scope.row.evaluatingCustomerSatisfactionDTOList"
         >
-          <em v-if="data.evalScorName === '만족'">
-            {{ `${data.evalScorName}(${data.userTotalCount}), ` }}
-          </em>
-          <span v-else>
-            {{
-              `${data.evalScorName}(${data.userTotalCount})${i === scope.row.evaluatingCustomerSatisfactionDTOList.length - 1 ? '' : ','} `
-            }}
-          </span>
+          <!-- <em v-if="data.evalScorName === '만족'">
+            {{ `${data.evalScorName}(${data.userTotalCount}명), ` }}
+          </em> -->
+          <span
+            v-html="
+              getUserDetail(
+                data,
+                i,
+                scope.row.evaluatingCustomerSatisfactionDTOList
+              )
+            "
+          />
         </template>
       </template>
     </el-table-column>

@@ -252,6 +252,7 @@ onMounted(async () => {
           max-range="365"
           range
           locale="ko"
+          min-date="2024"
           :day-names="['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']"
           :enable-time-picker="false"
           :year-first="true"
