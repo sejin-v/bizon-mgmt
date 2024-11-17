@@ -81,22 +81,26 @@ const handleSaveUserData = async () => {
     }
     const message = ref('');
     if (error.data.includes('bizEmpEmalAddr')) {
-      message.value = '담당 영업사원 이메일을 확인하세요.';
+      message.value = '담당 영업사원 이메일을 확인해주세요.';
     }
     if (error.data.includes('bizEmpHpno')) {
-      message.value = '담당 영업사원 연락처는 필수값 입니다.';
+      message.value = '담당 영업사원 연락처를 확인해주세요.';
     }
 
-    if (error.data.includes('cucoChrrNm')) {
-      message.value = '고객사 담당자 명은 필수값 입니다.';
+    if (error.data.includes('bizEmpNm')) {
+      message.value = '담당 영업사원 명을 확인해주세요.';
     }
-    if (error.data.includes('cucoChrrNm')) {
-      message.value = '고객사 담당자 명은 필수값 입니다.';
-    }
-
     if (error.data.includes('cucoEmalAddr')) {
-      message.value = '고객사 담당자 이메일을 확인하세요.';
+      message.value = '고객사 담당자 이메일을 확인해주세요.';
     }
+    if (error.data.includes('cucoChrrHpno')) {
+      message.value = '고객사 담당자 연락처를 확인해주세요.';
+    }
+
+    if (error.data.includes('cucoChrrNm')) {
+      message.value = '고객사 담당자 명을 확인해주세요.';
+    }
+
     openToast({
       message: message.value,
       type: IToastType.ERROR,
