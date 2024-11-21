@@ -218,7 +218,7 @@ const selectedDate = computed(() => {
 });
 
 onMounted(async () => {
-  handleSeasrch();
+  // handleSeasrch();
 });
 </script>
 

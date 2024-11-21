@@ -207,7 +207,7 @@ const handlePageChange = async () => {
 };
 
 onMounted(async () => {
-  handleSearch();
+  // handleSearch();
 });
 </script>
 

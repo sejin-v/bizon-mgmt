@@ -125,10 +125,10 @@ const handleClear = () => {
 };
 
 onMounted(async () => {
-  const params = getParams();
-  const result = await getSubjectiveFeedbackData(params);
-  subjectFeedbackList.value = result.statisfactionRatingSubjectiveDTOList;
-  paginationOptions.totalCount = result.totalCount;
+  // const params = getParams();
+  // const result = await getSubjectiveFeedbackData(params);
+  // subjectFeedbackList.value = result.statisfactionRatingSubjectiveDTOList;
+  // paginationOptions.totalCount = result.totalCount;
 });
 
 const selectDate = () => {

@@ -119,7 +119,7 @@ const getUserDetail = (data: any, index: number, target: any) => {
   return `${data.evalScorName}(${data.userTotalCount}명)${index === target.length - 1 ? '' : ','} `;
 };
 onMounted(async () => {
-  handleSearch();
+  // handleSearch();
 });
 </script>
 
