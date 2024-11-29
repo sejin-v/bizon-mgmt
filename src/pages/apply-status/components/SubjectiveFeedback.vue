@@ -225,6 +225,8 @@ const selectedDate = computed(() => {
           :day-names="['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']"
           :enable-time-picker="false"
           :year-first="true"
+          min-date="2024-11-01"
+          :max-date="dayjs().format('YYYY-MM-DD')"
           placeholder="시작일 종료일을 입력해 주세요"
           @open="handleClickDate"
         >
@@ -308,7 +310,8 @@ const selectedDate = computed(() => {
         <div class="flex justify-center">
           <div class="flex flex-col items-end">
             <p class="flex items-center">
-              {{ scope.row.sbscUpldSped }}M<icon
+              {{ scope.row.sbscUpldSped
+              }}<icon
                 name="triangle__full--525"
                 width="11"
                 height="9"
@@ -317,7 +320,8 @@ const selectedDate = computed(() => {
               />
             </p>
             <p class="flex items-center">
-              {{ scope.row.sbscDownSped }}M<icon
+              {{ scope.row.sbscDownSped
+              }}<icon
                 name="triangle__full--525"
                 width="11"
                 height="9"

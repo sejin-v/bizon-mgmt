@@ -258,6 +258,7 @@ onMounted(async () => {
         />
       </el-table>
       <Pagination
+        v-model="paginationOptions.currentPage"
         :total-count="paginationOptions.totalCount"
         :limit="paginationOptions.limit"
         @click="handlePageChange"

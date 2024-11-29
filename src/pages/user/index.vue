@@ -269,7 +269,8 @@ onMounted(async () => {
               :day-names="['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']"
               :enable-time-picker="false"
               :year-first="true"
-              min-date="2024"
+              min-date="2024-11-01"
+              :max-date="dayjs().format('YYYY-MM-DD')"
               placeholder="시작일 종료일을 입력해 주세요"
             >
               <template #action-preview />

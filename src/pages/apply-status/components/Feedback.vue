@@ -167,6 +167,8 @@ onMounted(async () => {
           :day-names="['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']"
           :enable-time-picker="false"
           :year-first="true"
+          min-date="2024-11-01"
+          :max-date="dayjs().format('YYYY-MM-DD')"
           placeholder="시작일 종료일을 입력해 주세요"
         >
           <template #action-preview />
@@ -255,8 +257,8 @@ onMounted(async () => {
     </el-table-column>
   </el-table>
 
-  <div class="flex justify-end w-full mt-[32px]" @click="handleChange">
-    <a href="javascript:void(0);" type="button" class="btn__full--primary-md"
+  <div class="flex justify-end w-full mt-[32px]">
+    <a type="button" class="btn__full--primary-md" @click="handleChange"
       >주관식 답변보기</a
     >
   </div>
