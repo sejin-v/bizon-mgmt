@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { IBoardData, IBoardParams, IPaginationOptions } from '~/types';
 
 const router = useRouter();
-
+const boardStore = useBoardStore();
 const searchOptionList = [
   {
     label: 'FAQ',
@@ -76,16 +76,19 @@ const handlePageChange = async () => {
 
 const route = useRoute();
 const handleRowClick = (target) => {
+  boardStore.setAtclKdCd(target.atclKdCd);
   router.push({
     path: `/board/detail`,
     query: { atclSno: target.atclSno, atclKdCd: target.atclKdCd },
   });
 };
 const goCreatePage = () => {
+  boardStore.setAtclKdCd(searchForm.atclKdCd);
   router.push('board/detail');
 };
 
 onMounted(async () => {
+  searchForm.atclKdCd = boardStore.atclKdCd;
   handleSearch();
 });
 </script>

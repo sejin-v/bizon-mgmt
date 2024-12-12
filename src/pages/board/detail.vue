@@ -4,6 +4,8 @@ import CustomTextarea from '~/example/components/custom-textarea/CustomTextarea.
 
 const router = useRouter();
 const route = useRoute();
+const boardStore = useBoardStore();
+
 const isCreateMode = ref(false);
 const confirmOption = reactive({
   content: '수정 되었습니다.',
@@ -186,6 +188,7 @@ onMounted(async () => {
     detailForm.value = result.data.data;
     initData.value = JSON.stringify(detailForm.value);
   } else {
+    detailForm.value.atclKdCd = boardStore.atclKdCd;
     isCreateMode.value = true;
   }
 });
