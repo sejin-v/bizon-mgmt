@@ -130,6 +130,7 @@ const handleChnageeMode = async (cancel: boolean) => {
     detailForm.value = result.data.data;
     detailForm.value.preAtclKdCd = result.data.data.atclKdCd;
   } else {
+    boardStore.setAtclKdCd(detailForm.value.atclKdCd);
     router.push('/board');
   }
 };
@@ -163,6 +164,7 @@ const handleDelete = async () => {
 
     confirmOption.content = '삭제 되었습니다.';
     await openConfirm(confirmOption);
+    boardStore.setAtclKdCd(detailForm.value.atclKdCd);
     router.push('/board');
   } catch (error) {
     console.error(error);
@@ -224,18 +226,18 @@ onMounted(async () => {
           <CustomInput
             :disabled="!isCreateMode"
             v-model="detailForm.atclTit"
-            max-length="20"
-            placeholder="제목을 입력하세요. 최대 20글자"
+            max-length="100"
+            placeholder="제목을 입력하세요. 최대 100글자"
           />
         </FormItem>
         <FormItem label="내용" required>
           <CustomTextarea
             :disabled="!isCreateMode"
             v-model="detailForm.atclCntn"
-            max-length="300"
+            max-length="2000"
             height="329"
             use-count
-            placeholder="내용을 입력하세요. 최대 300자"
+            placeholder="내용을 입력하세요. 최대 2000자"
           />
         </FormItem>
 
