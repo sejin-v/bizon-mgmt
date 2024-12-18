@@ -58,7 +58,8 @@ const handleClick = () => {
     <h1 class="logo" @click="handleClick">
       <a>
         <icon
-          name="logo-lg--fff"
+          name="lguplus-logo--white"
+          extension="png"
           width="104"
           height="28"
           alt="LG U+"
